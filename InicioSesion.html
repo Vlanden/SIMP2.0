@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio de sesion</title>
+    <link rel="stylesheet" href="Registro_E_Inicio_De_Sesion.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1"
+</head>
+
+<body>
+
+    <!--
+    <main>
+        <article id="Reg">
+            <section>
+                <br><br><br><br><br><br>
+                <h1 id="re">Inicio de Sesion</h1>
+                <form method="POST" action="Inicio.html">
+                    <br><br><br><br><br><br>
+                    <div id="frm">
+                        <label for="em" id="eml">Correo institucional</label>
+                        <br><br>
+                        <input type="email" id="em" placeholder="Coloque su correo" required>
+                        <br><br><br><br>
+                        <label for="cn" id="cnl">Contraseña</label>
+                        <br><br>
+                        <input type="tel" id="cn" placeholder="Contraseña" maxlength="9" minlength="9" required>
+                    </div>
+                    <br><br><br><br>
+                    <div id="li">
+                        <a href="Registro.html">¿No tiene una cuenta? Haga una con un clic</a>
+                        <br><br>
+                        <a href="recuperacion.html">¿Olvido su contraseña?</a>
+                    </div>
+                    <br><br><br><br>
+                    <div id="btt">
+                        <input type="submit" value="Iniciar" id="sb">
+                        <input type="reset" value="Borrar"id="rst">
+                    </div>
+                    <br><br><br><br><br><br>
+                </form>
+            </section>
+        </article>
+    </main>
+-->
+
+<header>
+
+</header>
+
+<main>
+    <article>
+
+        <section class="Registro">
+
+                <!-- Datos de usuario es el php donde se vera la plantilla con los datos del usuario -->
+
+            <form action="DatosUsuario.php" method="post">
+                
+                <!--
+
+                    No se la compliquen y generen un PHP con ese nombre
+                    La idea es que el php redirija al html de "Inicio".
+
+                    #C: Identificador del correo del usuario
+                    #P: Identificador de la contraseña del usuario
+                    #registro: Identificador del boton que dirige a la ventana con los datos del usuario
+                    #link: Link que lleva al inicio de sesion
+                    pattern: Atributo que se asegura de que unicamente sean ingresadas letras y espacios al nombre y no numeros
+
+                -->
+                <h1>Inicio de sesion</h1>
+                <br><br><br>
+                <input type="email" id="C" required placeholder="Correo electronico">
+                <br><br>
+                <input type="password" id="P" required placeholder="Ingrese contraseña">
+                <br><br><br>
+                <div id="link"><a href="recuperacion.html">¿Has olvidado tu contraseña? Recuperala aqui</a>
+                    <br><br><br>
+                </div>
+                <input type="submit" value="Inicia" id="registro">
+            </form>
+        </section>
+    </article>
+</main>
+
+<footer>
+
+</footer>
+
+
+
+</body>
