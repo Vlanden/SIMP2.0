@@ -17,13 +17,19 @@ function removeractiva(){
 
 } */
 
-//FUNCION PARA COMPROBAR QUE LAS CONTRASEÑAS SEAN IDENTICAS EN "recuperacion.html"
+/*
 
-function comprobaciopn(){
+FUNCION PARA COMPROBAR QUE LAS CONTRASEÑAS SEAN IDENTICAS EN "recuperacion.html"
+
+P1 Y P2: Variables paa contener los valores de P-New y P-New2
+
+*/
+
+function comprobacion(){
     let P1 = document.getElementById("P-New").value
     let P2 = document.getElementById("P-New2").value
 
-    if (clave1 == clave2) {
+    if (P1 == P2) {
        document.getElementById("formRe").submit();
     } else {
        alert("Las dos claves son distintas...\nPor favor vuelva a hacer el formulario")
