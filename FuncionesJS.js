@@ -21,7 +21,7 @@ function removeractiva(){
 
 FUNCION PARA COMPROBAR QUE LAS CONTRASEÑAS SEAN IDENTICAS EN "recuperacion.html"
 
-P1 Y P2: Variables paa contener los valores de P-New y P-New2
+P1 Y P2: Variables paa contener los valores de P-New y P-New2 respectivamente
 
 */
 
