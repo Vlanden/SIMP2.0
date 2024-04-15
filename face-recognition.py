@@ -8,6 +8,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 import imutils
 
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 #Funcion Sing
 
@@ -78,10 +79,12 @@ rangox = 20
 #exactitud de deteccion
 Detect = 0.5 
 
+print("si")
 
 #herramienta de dibujo
 mpDibujo = mp.solutions.drawing_utils
 confiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)
+print("si")
 
 
 #malla facial como objeto
@@ -89,12 +92,13 @@ MafaObj =  mp.solutions.face_mesh
 MallaFacial = MafaObj.FaceMesh(max_num_faces = 1)
 
 
-
+print("si")
 #objeto detector de caras
 ObjetoDet = mp.solutions.face_detection
+print("no")
 Detector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)
 
-
+print("no")
 #por si se ocupa informacion local
 info = []
 
@@ -117,7 +121,7 @@ cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 cap.set(3, 1280)
 cap.set(4, 720)
 
-
+print("si")
 Ingresar()
 
 pantalla.mainloop()
