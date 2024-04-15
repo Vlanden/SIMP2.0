@@ -92,7 +92,7 @@ body{
     width: 400px;
     margin-left: 47px;
     margin-top: 10px;
-    margin-bottom: 55px;
+    margin-bottom: 60px;
     border: none;
     background: none;
     transition: 0.5s;
@@ -105,3 +105,48 @@ body{
     margin-bottom: 24px;
     margin-left: 190px;
 }
+
+#config{
+    display: grid;
+    justify-content: space-around;
+    width: auto;
+}
+
+#cf{
+    margin-left: 6px;
+    height: 32px;
+    width: auto;
+    margin-bottom: 24px;
+    transition: 0.5s;
+}
+
+#cf:hover{
+    transform: scale(1.2);
+    transition: 0.5s;
+}
+
+/* #config{
+    outline: none;
+    position: relative;
+    border: none;
+    background-color: cornflowerblue;
+    color: azure;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+    align-items: center;
+    left: 50%;
+    transform: translate(-40%, 0%);
+    margin-top: 20px;
+    margin-bottom: 50px;
+    transition: 1s;
+}
+
+#config:hover{
+    background-color:mediumblue;
+    transition: 1s;
+    width: 110px;
+    height: 50px;
+    border-radius: 8px;
+    box-shadow:01px 0px 8px 0px cornflowerblue;
+} */

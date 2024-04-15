@@ -12,7 +12,7 @@
     <main>
         <article>
             <section class="Registro">
-                    <form action="DatosUsuario.php" method="post" id="formRe">
+                    <form action="DatosUsuario.php" method="post" id="formRe" enctype="multipart/form-data">
                         <!--
                             No se la compliquen y generen un PHP con ese nombre
                             La idea es que el php redirija al html de "Inicio".
@@ -32,6 +32,10 @@
                         <br><br>
                         <label class="label" for="P-New2">Contraseña</label><br>
                         <input type="password" id="P-New2" required placeholder="Reingrese la nueva contraseña">
+                        <br><br><br>
+                        <div id="link"><a href="InicioSesion.html">Haga click para volver</a>
+                            <br><br><br>
+                        </div>
                         <br><br><br><br>
                         <input type="submit" value="Inicia" id="registro" onclick="comprobacion()">
                         <br>
