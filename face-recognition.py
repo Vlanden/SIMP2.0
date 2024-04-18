@@ -18,7 +18,7 @@ def Ingresar():
 
     #Checar video captura
     if cap is not NONE:
-        print("cap")
+        #print("cap")
         
         ret, frame = cap.read()
 
@@ -26,14 +26,14 @@ def Ingresar():
         frame = imutils.resize(frame, width = 1280)
 
         #Frame rgb modificable
-        frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RG)
+        frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
 
         #Frame a mostrar y cambiar de color
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RG)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         if ret == True:
-            print("ret")
+            #print("ret")
             #Agregar malla facial
             res = MallaFacial.process(frameRGB)
 
@@ -48,6 +48,50 @@ def Ingresar():
                 for rostros in res.multi_face_landmarks:
                     #Dibujar
                     mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACE_CONNECTIONS, confiDibujo, confiDibujo)
+
+                    #Extraer puntos
+                    for id, puntos in enumerate(rostros.landmask):
+
+                        #Info de la imagen
+                        al, an, ni = frame.shape
+                        x = int(puntos.x * an)
+                        y = int(puntos.y *al)
+                        px.append(x)
+                        py.append(y)
+                        lista.append([id, x, y])
+
+                        #Confirmar puntos
+                        if len(lista) == 468:
+
+                            #Ojo derecho
+                            x1, y1 = lista[145][1:]
+                            x2, y2 = lista[159][1:]
+                            longitud1 = math.hypot(x2-x1, y2-y1)
+
+                            #Ojo izquierdo
+                            x3, y3 = lista[374][1:]
+                            x4, y4 = lista[386][1:]
+                            longitud2 = math.hypot(x4-x3, y4-y3)
+
+                            #detector de rostros
+
+                            rostrosDet = Detector.process(frameRGB)
+
+                            if rostrosDet.detections is not NONE:
+
+                                for cara in rostrosDet.detections:
+
+                                    #info del recuadro : ID, BBox, Score
+                                    score = cara.score
+                                    score = score[0] #El score es una lista dentro de otra lista
+
+                                    bbox = cara.location_data.relative_bounding_box
+
+                                    if score > Detect:
+                                        print("hola")
+
+
+
             
         #Convertir video
         im = Image.fromarray(frame)
