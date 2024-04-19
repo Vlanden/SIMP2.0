@@ -1,3 +1,4 @@
+#nota: la ilumnacion es importante para que se ejecute el programa, sin iluminacion adecuada no se ejecutara
 import cv2
 import mediapipe as mp
 import face_recognition as fr
@@ -13,7 +14,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '1'
 #Funcion Sing
 
 def Ingresar():
-    global cap,  conteo, parpadeo, img_info, paso, ret, frame
+    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla
     
 
     #Checar video captura
@@ -33,7 +34,8 @@ def Ingresar():
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         if ret == True:
-            #print("ret")
+            #
+            print("ret")
             #Agregar malla facial
             res = MallaFacial.process(frameRGB)
 
@@ -44,13 +46,21 @@ def Ingresar():
             lista = []
 
             if res.multi_face_landmarks:
+                print("hh")
                 #Extraer mallas faciales
+                
                 for rostros in res.multi_face_landmarks:
+                    print("gg")
                     #Dibujar
                     mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACE_CONNECTIONS, confiDibujo, confiDibujo)
+                    # nota: nesecita tener buena iluminacion para ejecutarse
+                    print("llll")
+
 
                     #Extraer puntos
-                    for id, puntos in enumerate(rostros.landmask):
+                    
+                    for id, puntos in enumerate(rostros.landmask):   #no entra al for
+                        print("ggg")
 
                         #Info de la imagen
                         al, an, ni = frame.shape
@@ -103,6 +113,7 @@ def Ingresar():
         lblVideo.after(10, Ingresar)
     
     else:
+        print("no jala")
         cap.release()
 
 
