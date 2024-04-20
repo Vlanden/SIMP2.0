@@ -1,6 +1,8 @@
 #nota: la ilumnacion es importante para que se ejecute el programa, sin iluminacion adecuada no se ejecutara
 import cv2
 import mediapipe as mp
+from mediapipe.tasks import python
+from mediapipe.tasks.python import vision
 import face_recognition as fr
 import numpy
 import os 
@@ -52,13 +54,14 @@ def Ingresar():
                 for rostros in res.multi_face_landmarks:
                     print("gg")
                     #Dibujar
-                    mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACE_CONNECTIONS, confiDibujo, confiDibujo)
+                    #
+                    mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACEMESH_TESSELATION, confiDibujo, confiDibujo)
                     # nota: nesecita tener buena iluminacion para ejecutarse
                     print("llll")
 
 
                     #Extraer puntos
-                    
+                    """
                     for id, puntos in enumerate(rostros.landmask):   #no entra al for
                         print("ggg")
 
@@ -98,7 +101,7 @@ def Ingresar():
                                     bbox = cara.location_data.relative_bounding_box
 
                                     if score > Detect:
-                                        print("hola")
+                                        print("hola")"""
 
 
 
