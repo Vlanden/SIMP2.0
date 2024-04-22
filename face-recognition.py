@@ -108,6 +108,39 @@ def Ingresar():
                                         anc= bbox.width
                                         alt = bbox.height
 
+                                        xi = int(xi * an)
+                                        yi = int(yi * al)
+                                        anc = int(anc * an)
+                                        alt = int(alt * al)
+
+                                        """#offset de x
+                                        rangox = (rangox / 100) * anc
+                                        
+                                        xi = int(xi - int(rangox / 2))
+                                        anc = int(anc + rangox)
+
+                                        
+                                        
+                                        #offset de y
+                                        rangoy = (rangoy / 100) + alt
+                                        yi = int(yi - int(rangoy / 2))
+                                        alt = int(alt + rangoy)"""
+
+                                        #posible error
+                                        if xi < 0:
+                                            xi = 0
+                                        if yi < 0:
+                                            yi = 0
+                                        if anc < 0:
+                                            anc = 0
+                                        if alt < 0:
+                                            alt = 0
+
+                                        #Dibujar rectangulo
+                                        
+                                        cv2.rectangle(frame, (xi,yi,anc,alt), (255,255,255), 2)
+
+
 
 
             
