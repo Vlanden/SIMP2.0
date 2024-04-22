@@ -11,7 +11,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 import imutils
 
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '1'
+
 
 #Funcion Sing
 
@@ -61,8 +61,8 @@ def Ingresar():
 
 
                     #Extraer puntos
-                    """
-                    for id, puntos in enumerate(rostros.landmask):   #no entra al for
+                    
+                    for id, puntos in enumerate(rostros.landmark):   #no entra al for
                         print("ggg")
 
                         #Info de la imagen
@@ -80,6 +80,8 @@ def Ingresar():
                             x1, y1 = lista[145][1:]
                             x2, y2 = lista[159][1:]
                             longitud1 = math.hypot(x2-x1, y2-y1)
+
+                            cv2.circle(frame, (x1, y1), 2, (255,0,0), cv2.FILLED)
 
                             #Ojo izquierdo
                             x3, y3 = lista[374][1:]
@@ -101,7 +103,10 @@ def Ingresar():
                                     bbox = cara.location_data.relative_bounding_box
 
                                     if score > Detect:
-                                        print("hola")"""
+                                        xi = bbox.xmin
+                                        yi= bbox.ymin
+                                        anc= bbox.width
+                                        alt = bbox.height
 
 
 
