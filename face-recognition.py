@@ -4,7 +4,7 @@ import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 import face_recognition as fr
-import numpy
+import numpy as np
 import os 
 import math
 from tkinter import *
@@ -12,6 +12,20 @@ from PIL import Image, ImageTk
 import imutils
 
 
+#Codificar iamgenes
+def CodeFun(images):
+
+    listacod = [] 
+
+    for img in images:
+        #cambiar color
+        cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+        cod = fr.face_encodings(img)[0]
+
+        listacod.append(cod)
+
+    return listacod
 
 #Funcion Sing
 
@@ -21,7 +35,7 @@ def Ingresar():
 
     #Checar video captura
     if cap is not NONE:
-        #print("cap")
+        
         
         ret, frame = cap.read()
 
@@ -37,7 +51,7 @@ def Ingresar():
 
         if ret == True:
             #
-            print("ret")
+            
             #Agregar malla facial
             res = MallaFacial.process(frameRGB)
 
@@ -48,23 +62,20 @@ def Ingresar():
             lista = []
 
             if res.multi_face_landmarks:
-                print("hh")
+                
                 #Extraer mallas faciales
                 
                 for rostros in res.multi_face_landmarks:
-                    print("gg")
+                    
                     #Dibujar
                     #
                     mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACEMESH_TESSELATION, confiDibujo, confiDibujo)
                     # nota: nesecita tener buena iluminacion para ejecutarse
-                    print("llll")
-
-
+                    
                     #Extraer puntos
                     
                     for id, puntos in enumerate(rostros.landmark):   #no entra al for
-                        print("ggg")
-
+                        
                         #Info de la imagen
                         al, an, ni = frame.shape
                         x = int(puntos.x * an)
@@ -79,15 +90,26 @@ def Ingresar():
                             #Ojo derecho
                             x1, y1 = lista[145][1:]
                             x2, y2 = lista[159][1:]
-                            longitud1 = math.hypot(x2-x1, y2-y1)
-
-                            cv2.circle(frame, (x1, y1), 2, (255,0,0), cv2.FILLED)
+                            longitud1 = math.hypot(x2-x1, y2-y1)                          
 
                             #Ojo izquierdo
                             x3, y3 = lista[374][1:]
                             x4, y4 = lista[386][1:]
                             longitud2 = math.hypot(x4-x3, y4-y3)
 
+                            #parietal derecho
+                            x5, y5 = lista[139][1:]
+
+                            #Parietal izquierdo
+                            x6, y6 = lista[368][1:]
+
+                            #ceja derecha
+                            x7, y7 = lista[70][1:]
+
+                            #ceja izquierda
+                            x8, y8 = lista[300][1:]
+
+                            cv2.circle(frame, (x8, y8), 2, (255,0,0), cv2.FILLED)
                             #detector de rostros
 
                             rostrosDet = Detector.process(frameRGB)
@@ -136,14 +158,86 @@ def Ingresar():
                                         if alt < 0:
                                             alt = 0
 
-                                        #Dibujar rectangulo
+
+                                        if paso == 0:
+
+                                            #Dibujar rectangulo
                                         
-                                        cv2.rectangle(frame, (xi,yi,anc,alt), (255,255,255), 2)
+                                            cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,255), 2)
+
+                                            #centrar cara
+                                            if x7 > x5 and x8 < x6:
+                                                cv2.rectangle(frame, (xi,yi,anc,alt), (0,0,255), 2)
+
+                                                #Contar parpadeos
+
+                                                #Nota: hay q modificar el parametro de longitudes dependiendo del lugar donde se instale 
+                                                #y la distancia a la que estara el usuario
+                                                if longitud1 <= 10 and longitud2 <= 10 and parpadeo == False:
+                                                    conteo = conteo + 1
+                                                    parpadeo = True
+                                                elif longitud1 > 10 and longitud2 > 10 and parpadeo == True:
+                                                    parpadeo = False
+
+                                                cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
+
+                                                if conteo == 3:
+                                                    
+                                                    #DB De las caras
+                                                    images = []
+                                                    clases = []
+                                                    listarf = os.listdir(SalidaRostros)
+
+                                                    for lin in listarf:
+
+                                                        #leer imagen
+                                                        imgdb = cv2.imread(f"{SalidaRostros}/{lin}")
+                                                        #guardar imagen 
+                                                        images.append(imgdb)
+
+                                                        clases.append(os.path.splitext(lin)[0])
+
+                                                    CaraCod = CodeFun(images)
+
+                                                    
+                                                    paso = 1
+
+                                                if paso == 1:
+
+                                                    #buscar caras
+                                                    facess = fr.face_locations(frameRGB)
+                                                    facescod = fr.face_encodings(frameRGB, facess)
+                                                    
+
+                                                    #iterar
+                                                    for facecod, facesloc in zip(facescod, facess):
+
+                                                        #Matching
+                                                        Match = fr.compare_faces(CaraCod, facecod)
 
 
+                                                        #similitud
+                                                        simi = fr.face_distance(CaraCod, facecod)
+                                                        if simi[0] > 0.4:
+                                                            cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
+                                                            paso = 0
+                                                            conteo = 0
 
+                                                        else:
+                                                            #min 
+                                                            mini = np.argmin(simi)
 
-            
+                                                            if Match[mini]:
+                                                                cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
+                                                                print("eee")
+
+                                                                paso = 0
+                                                                conteo = 0
+
+                                                    
+                                            else:
+                                                conteo = 0
+
         #Convertir video
         im = Image.fromarray(frame)
         img = ImageTk.PhotoImage(image = im)
@@ -158,17 +252,15 @@ def Ingresar():
         cap.release()
 
 
-
-
-
-
 #Paths 
 
 SalidaRostros = "C:/Users/GenaroSigalaAlvarado/Documents/GitHub/SIMP2.0/Rostros"
 ChecadorRostros = "C:/Users/GenaroSigalaAlvarado/Documents/GitHub/SIMP2.0/Rostros/"
 
 #variables
-
+paso = 0
+parpadeo = False
+conteo = 0
 
 #rango estra a la cara
 rangoy = 30
@@ -177,18 +269,14 @@ rangox = 20
 #exactitud de deteccion
 Detect = 0.5 
 
-
-
 #herramienta de dibujo
 mpDibujo = mp.solutions.drawing_utils
 confiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)
 
 
-
 #malla facial como objeto
 MafaObj =  mp.solutions.face_mesh
 MallaFacial = MafaObj.FaceMesh(max_num_faces = 1)
-
 
 
 #objeto detector de caras
@@ -200,20 +288,18 @@ Detector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selecti
 info = []
 
 
-
-
 #Ventana principal
 pantalla = Tk()
 pantalla.title("Reconocimiento")
 pantalla.geometry("1280x720")
 
     
-    
-    #label de video
+#label de video
 lblVideo = Label(pantalla)
 lblVideo.place(x=0, y=0)
 
-    #captura de video
+
+#captura de video
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 cap.set(3, 1280)
 cap.set(4, 720)
