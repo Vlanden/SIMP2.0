@@ -13,7 +13,22 @@ import imutils
 
 
 #Codificar iamgenes
-def CodeFun(images):
+def CodeFun():
+    global images, clases, listarf
+
+    #DB De las caras
+    images = []
+    clases = []
+    listarf = os.listdir(SalidaRostros)
+
+    for lin in listarf:
+
+        #leer imagen
+        imgdb = cv2.imread(f"{SalidaRostros}/{lin}")
+        #guardar imagen 
+        images.append(imgdb)
+
+        clases.append(os.path.splitext(lin)[0])
 
     listacod = [] 
 
@@ -30,7 +45,7 @@ def CodeFun(images):
 #Funcion Sing
 
 def Ingresar():
-    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla
+    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla, clases
     
 
     #Checar video captura
@@ -69,7 +84,7 @@ def Ingresar():
                     
                     #Dibujar
                     #
-                    mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACEMESH_TESSELATION, confiDibujo, confiDibujo)
+                    #mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACEMESH_TESSELATION, confiDibujo, confiDibujo)
                     # nota: nesecita tener buena iluminacion para ejecutarse
                     
                     #Extraer puntos
@@ -181,23 +196,9 @@ def Ingresar():
 
                                                 cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
 
-                                                if conteo == 3:
+                                                if conteo == 2:
                                                     
-                                                    #DB De las caras
-                                                    images = []
-                                                    clases = []
-                                                    listarf = os.listdir(SalidaRostros)
-
-                                                    for lin in listarf:
-
-                                                        #leer imagen
-                                                        imgdb = cv2.imread(f"{SalidaRostros}/{lin}")
-                                                        #guardar imagen 
-                                                        images.append(imgdb)
-
-                                                        clases.append(os.path.splitext(lin)[0])
-
-                                                    CaraCod = CodeFun(images)
+                                                    
 
                                                     
                                                     paso = 1
@@ -215,26 +216,27 @@ def Ingresar():
                                                         #Matching
                                                         Match = fr.compare_faces(CaraCod, facecod)
 
-
                                                         #similitud
                                                         simi = fr.face_distance(CaraCod, facecod)
-                                                        if simi[0] > 0.4:
+
+                                                        print(simi)
+
+                                                        min = np.argmin(simi)
+                                                        print(min)
+                                                  
+                                                        
+                                                        
+                                                        if simi[min] > 0.45:
+                                                            print("Usuario no registrado")
                                                             cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
                                                             paso = 0
                                                             conteo = 0
-
+                                                            
                                                         else:
-                                                            #min 
-                                                            mini = np.argmin(simi)
-
-                                                            if Match[mini]:
-                                                                cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
-                                                                print("eee")
-
-                                                                paso = 0
-                                                                conteo = 0
-
-                                                    
+                                                            print("Bienvenido", clases[min])
+                                                            cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
+                                                            paso = 0
+                                                            conteo = 0
                                             else:
                                                 conteo = 0
 
@@ -303,6 +305,8 @@ lblVideo.place(x=0, y=0)
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 cap.set(3, 1280)
 cap.set(4, 720)
+
+CaraCod = CodeFun()
 
 Ingresar()
 
