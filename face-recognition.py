@@ -196,11 +196,7 @@ def Ingresar():
 
                                                 cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
 
-                                                if conteo == 2:
-                                                    
-                                                    
-
-                                                    
+                                                if conteo == 2:                                                    
                                                     paso = 1
 
                                                 if paso == 1:
