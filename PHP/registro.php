@@ -23,7 +23,7 @@ if ( !empty($email) ) {
                     $types = ["image/jpeg", "image/jpg", "image/png"];
                     if (in_array($img_type, $types) === true) {
                         
-                        $img_name = $name . $img_name;
+                        $img_name = $name .'.png';
                         if (move_uploaded_file($tmp_name, "images/" . $img_name)) {
                         
                             $encrypt_pass = password_hash($_POST['pass'], PASSWORD_DEFAULT,['cost' => 15]);
