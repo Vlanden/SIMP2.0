@@ -29,9 +29,6 @@ Protección contra inyección SQL:
 Aunque estás utilizando mysqli_real_escape_string es preferible utilizar (prepared statements) para proteger contra ataques de inyección SQL. 
 Manejo de errores y mensajes de usuario:
 En lugar de mostrar mensajes de error directamente en la página, considera redirigir al usuario a una página de error o mostrar un mensaje más amigable.
-Además, en lugar de mostrar el correo electrónico en el mensaje de error, podrías simplemente decir “Correo electrónico o contraseña incorrectos”.
-Redirección después del inicio de sesión:
-Después de verificar las credenciales, deberías redirigir al usuario a una página de inicio de sesión exitoso (por ejemplo, “users.php”) en lugar de simplemente mostrar un mensaje.
 Validación de campos de entrada:
 Asegúrate de validar los campos de entrada (correo electrónico y contraseña) antes de procesarlos. Por ejemplo, verifica si el correo electrónico tiene un formato válido y si la contraseña cumple con ciertos requisitos (longitud mínima, caracteres especiales, etc.).
 Manejo de sesiones:
