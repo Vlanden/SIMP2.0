@@ -55,21 +55,21 @@ PRIMER REGISTRO
         <section>
             <br><br><br><br><br>
             <h1 id="re">Registro</h1>
-            <form method="POST" action="tumama.php">
+            <form method="POST" enctype="multipart/form-data" action="registro.php">
                 <br><br><br><br><br>
                 <div id="frm">
                     <label for="em" id="eml">Correo escolar</label>
                     <br><br>
-                    <input type="email" id="em" placeholder="Coloque su correo" required>
+                    <input type="email" id="em" name="correo" placeholder="Coloque su correo" required>
                     <br><br><br><br><br><br>
                     <label for="cn" id="cnl">Contraseña</label>
                     <br><br>
-                    <input type="password" id="cn" placeholder="Contraseña" maxlength="9" minlength="9" required>
+                    <input type="password" name="pass" id="cn" placeholder="Contraseña" maxlength="9" minlength="9" required>
                     <br><br><br><br><br><br>
                     <label for="nm" id="fal">Video del alumno</label>
                     <br><br>
                     <div class="file">
-                        <input type="file" id="fa" required accept="mp4">
+                        <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg,image/jpg,image/JPG,image/PNG" id="fa">
                     </div>
                 </div>
                 <br><br><br><br><br>
