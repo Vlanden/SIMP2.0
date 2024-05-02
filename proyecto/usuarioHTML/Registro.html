@@ -2,8 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro</title>
-    <link rel="stylesheet" href="Registro_E_Inicio_De_Sesion.css">
+    <link rel="stylesheet" href="../usuarioCSS/Registro_E_Inicio_De_Sesion.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="FuncionesJS.js"></script>
 </head>
 
 <body>
@@ -39,6 +40,9 @@
                 <label class="label" for="C">Correo</label><br>
                 <input type="email" id="C" required placeholder="Correo electronico">
                 <br><br>
+                <label id="idLabel" for="checkID">¿Cuenta con un Identificador?</label>
+                <input type="checkbox" id="checkID">
+                <br><br>
                 <label class="label" for="ID">Identificador</label><br>
                 <input type="text" id="ID" required placeholder="Identificador">
                 <br><br>
@@ -53,7 +57,7 @@
                 <div id="link"><a href="InicioSesion.html">¿Ya tienes un perfil? Inicia sesion</a>
                     <br><br><br>
                 </div>
-                <input type="submit" value="Registrarse" id="registro">
+                <input type="submit" value="Registrarse" id="registro" onclick="call()">
             </form>
         </section>
 
