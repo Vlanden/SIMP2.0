@@ -30,7 +30,7 @@ $name=$_POST['name'];
                                 VALUES ('$email', '$encrypt_pass', '$img_name')");
                                     $result = mysqli_fetch_assoc($select_sql2);
                                     $_SESSION['unique_id'] = $result['unique_id'];
-                                    header("Location:google.com");
+                                    header("Location:InicioSesion.html");
                     } else {
                         echo "Cargue un archivo de imagen: jpeg, png, jpg. PRUEBAA1";
                     }
