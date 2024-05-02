@@ -27,11 +27,13 @@ $name=$_POST['name'];
                         
                             $encrypt_pass = password_hash($_POST['pass'], PASSWORD_DEFAULT,['cost' => 15]);
                             $select_sql2 = mysqli_query($conexion, "SELECT * FROM simp WHERE correo = '{$email}'");
+                            if (mysqli_num_rows($select_sql2) > 0) {
                             $insert_query = mysqli_query($conexion, "INSERT INTO simp(correo, pass, img )
                                 VALUES ('$email', '$encrypt_pass', '$img_name')");
                                     $result = mysqli_fetch_assoc($select_sql2);
                                     $_SESSION['unique_id'] = $result['unique_id'];
                                     header("Location:InicioSesion.html");
+                            }
                     } else {
                         echo "Cargue un archivo de imagen: jpeg, png, jpg. PRUEBAA1";
                     }
