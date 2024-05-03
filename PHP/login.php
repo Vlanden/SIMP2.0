@@ -9,7 +9,7 @@ if (!empty($email) && !empty($password)) {
         $row = mysqli_fetch_assoc($sql);
         if (password_verify($password, $row['pass'])) {
            // $_SESSION['ID'] = $row['ID'];
-            header("Location:recuperacion.html");
+            header("Location:../Succesful.html");
         } else {
             echo "¡Correo electrónico o la contraseña son incorrectos!";
         }
