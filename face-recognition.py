@@ -252,8 +252,8 @@ def Ingresar():
 
 #Paths 
 
-SalidaRostros = "C:/Users/PC/SIMP2.0/Rostros/"
-ChecadorRostros = "C:/Users/PC/SIMP2.0/Rostros/"
+SalidaRostros = "Rostros/"
+ChecadorRostros = "Rostros/"
 
 #variables
 paso = 0
