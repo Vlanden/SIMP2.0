@@ -22,7 +22,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             if (in_array($img_ext, $extensions) === true && in_array($img_type, $types) === true) {
                     
                     $img_name = $name .'.png';
-                    if (move_uploaded_file($tmp_name, "C:/Users/PC/SIMP2.0/Rostros/" . $img_name)) {
+                    if (move_uploaded_file($tmp_name, "../Rostros/" . $img_name)) {
                         $encrypt_pass = password_hash($_POST['pass'], PASSWORD_DEFAULT,['cost' => 15]);
                         
                         $insert_query = mysqli_query($conexion, "INSERT INTO simp(correo, pass, img )
@@ -32,7 +32,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                         if (mysqli_num_rows($select_sql2) > 0) {
                                 $result = mysqli_fetch_assoc($select_sql2);
                                 $_SESSION['unique_id'] = $result['unique_id'];
-                                header("Location:InicioSesion.html");
+                                header("Location:../InicioSesion.html");
                         }
                         echo "Algo salió mal. ¡Inténtalo de nuevo!";
                     }
