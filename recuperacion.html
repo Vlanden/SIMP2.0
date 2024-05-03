@@ -13,21 +13,17 @@
             <section>
                 <br><br><br><br><br><br>
                 <h1 id="re">Inicio de Sesion</h1>
-                <form method="POST" action="tumama.php">
+                <form method="POST" action="PHP/recupera.php">
                     <br><br><br><br><br><br>
                     <div id="frm">
                         <label for="em" id="eml">Ingrese su correo</label>
                         <br><br>
-                        <input type="email" id="em" placeholder="Coloque su correo" required>
+                        <input type="email" name="email" id="em" placeholder="Coloque su correo" required>
                         <br><br><br><br>
                         <label for="cn" id="cnl">Contraseña</label>
                         <br><br>
-                        <input type="tel" id="cn" placeholder="Contraseña" maxlength="9" minlength="9" required>
-                        <br><br><br><br>
-                        <label for="cn" id="cnl">Confirme su nueva contraseña</label>
-                        <br><br>
-                        <input type="tel" id="cn" placeholder="Contraseña" maxlength="9" minlength="9" required>
-                    </div>
+                        <input type="password" name="pass" id="cn" placeholder="Contraseña" maxlength="9" minlength="9" required>
+                        </div>
                     <br><br><br><br><br><br>
                     <div id="btt">
                         <input type="submit" value="Registrarse" id="sb">
