@@ -1,14 +1,18 @@
 <?php
 session_start();
 include_once "conexionBD.php";
-$email = mysqli_real_escape_string($conexion, $_POST['correo']);
-$password = mysqli_real_escape_string($conexion, $_POST['pass']);
+$email=$_POST["correo"];
+$password=$_POST["pass"];
+$email=stripcslashes($email);
+$password=stripcslashes($password);
+$email = mysqli_real_escape_string($conexion, $email);
+$password = mysqli_real_escape_string($conexion, $password);
 if (!empty($email) && !empty($password)) {
     $sql = mysqli_query($conexion, "SELECT * FROM simp WHERE correo = '{$email}'");
     if (mysqli_num_rows($sql) > 0) {
         $row = mysqli_fetch_assoc($sql);
         if (password_verify($password, $row['pass'])) {
-           // $_SESSION['ID'] = $row['ID'];
+           //$_SESSION['ID'] = $row['ID'];
             header("Location:recuperacion.html");
         } else {
             echo "¡Correo electrónico o la contraseña son incorrectos!";
