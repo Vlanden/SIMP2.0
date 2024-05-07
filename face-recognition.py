@@ -10,6 +10,8 @@ import math
 from tkinter import *
 from PIL import Image, ImageTk
 import imutils
+import time
+import datetime
 
 
 #Codificar iamgenes
@@ -40,18 +42,107 @@ def CodeFun():
 
         listacod.append(cod)
 
-    return listacod
+    return 
+
+
+
+"""
+def reiniciar_programa():
+    while True:
+        # Obten la hora actual
+        hora_actual = time.localtime().tm_hour
+
+        # Si es medianoche (00:00), reinicia el programa
+        if hora_actual == 0:
+            
+            # Agrega aquí las acciones que deseas realizar antes de reiniciar
+            # ...
+
+            # Sale del bucle para evitar reinicios continuos
+            break
+
+        # Espera un minuto antes de verificar nuevamente
+        time.sleep(60)
+
+
+
+
+def reinicio():
+
+    global CaraCod
+
+    ahora = datetime.datetime.now()
+
+        #print(ahora)
+
+    mmm = ahora.strftime("%H:%M")
+        #print(mmm)
+
+            #print(type(mmm))
+
+    if mmm == "16:22":
+
+        pantalla2.destroy()
+        pantalla2 = Toplevel(pantalla)
+        pantalla2.title("Uso")
+        pantalla2.geometry("1280x720")
+
+                
+            #label de video
+        lblVideo = Label(pantalla2)
+        lblVideo.place(x=0, y=0)
+
+        print("entra")
+        CaraCod = CodeFun()    
+        Ingresar()           
+"""
+        
+def pantr():
+
+    global pantalla, pantalla2, CaraCod, cap, lblVideo
+
+    print("si")
+    pantalla2.destroy()
+    
+    reinicio()
+
+
+def reinicio():
+
+    global pantalla, pantalla2, CaraCod, cap, lblVideo
+
+    pantalla2 = Toplevel(pantalla)
+    pantalla2.title("Uso")
+    pantalla2.geometry("1280x720")
+
+    #label de video
+    lblVideo = Label(pantalla2)
+    lblVideo.place(x=0, y=0)
+
+
+    #captura de video
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap.set(3, 1280)
+    cap.set(4, 720)
+
+    CaraCod = CodeFun()
+    Ingresar()
+
+    time = 30
+    pantalla.after(time * 1000, pantr)
+    close = pantalla2.protocol("WH_DELETE_WINDOW", pantr)
+    
 
 #Funcion Sing
 
 def Ingresar():
-    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla, clases
+    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla, pantalla2, clases
     
 
     #Checar video captura
     if cap is not NONE:
         
-        
+
         ret, frame = cap.read()
 
         #Redimencionar
@@ -252,8 +343,8 @@ def Ingresar():
 
 #Paths 
 
-SalidaRostros = "C:/Users/GenaroSigalaAlvarado/Documents/GitHub/SIMP2.0/Rostros"
-ChecadorRostros = "C:/Users/GenaroSigalaAlvarado/Documents/GitHub/SIMP2.0/Rostros/"
+SalidaRostros = "c:/Users/Genaro/Documents/SIMP2.0/Rostros"
+ChecadorRostros = "c:/Users/Genaro/Documents/SIMP2.0/Rostros/"
 
 #variables
 paso = 0
@@ -291,9 +382,13 @@ pantalla = Tk()
 pantalla.title("Reconocimiento")
 pantalla.geometry("1280x720")
 
+"""
+pantalla2 = Toplevel(pantalla)
+pantalla2.title("Uso")
+pantalla2.geometry("1280x720")
     
 #label de video
-lblVideo = Label(pantalla)
+lblVideo = Label(pantalla2)
 lblVideo.place(x=0, y=0)
 
 
@@ -301,12 +396,26 @@ lblVideo.place(x=0, y=0)
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 cap.set(3, 1280)
 cap.set(4, 720)
+"""
 
-CaraCod = CodeFun()
 
-Ingresar()
-
+#CaraCod = CodeFun()
+#Ingresar()
+reinicio()
 pantalla.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
