@@ -5,6 +5,65 @@ import imutils
 import time
 import datetime
 
+from io import open
+import pymysql
+import requests
+
+entrada = input("Ingresa el nivel de entrada: ")
+
+def Cual_Entra():
+
+    global entrada
+    entrada = int(entrada)
+
+    if entrada == 1:
+        sql = "SELECT * FROM `usuarios`"
+        return sql
+    elif entrada == 2:
+        sql = "SELECT * FROM `usuarios` WHERE nivel >= '2'"
+        return sql
+    elif entrada == 3:
+        sql = "SELECT * FROM `usuarios` WHERE nivel >= '3'"
+        return sql
+    else:
+        print("no se ingreso nivel de acceso")
+
+
+def conexion():
+
+    global entrada
+    conexion = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="",
+        db="caras"
+    )
+
+    cursor = conexion.cursor()
+
+    sql = Cual_Entra()
+
+    cursor.execute(sql)
+
+    lista = cursor.fetchall()
+
+    return lista
+
+
+
+def descargar():
+
+    global entrada
+    for search in conexion():
+
+        response = requests.get(search[2])
+
+        with open(f"{search[1]}.png", "wb") as file:
+            file.write(response.content)
+
+descargar()
+
+"""
 def pantr():
 
     global pantalla, pantalla2
@@ -42,7 +101,7 @@ pantalla.mainloop()
 
 
 """
-
+"""
 import tkinter as tk
 import time
 
@@ -76,4 +135,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = PantallaReiniciadora(root)
     root.mainloop()
-    """
+"""
+
+
