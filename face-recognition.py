@@ -128,7 +128,7 @@ def reinicio():
     CaraCod = CodeFun()
     Ingresar()
 
-    time = 30
+    time = 60
     pantalla.after(time * 1000, pantr)
     close = pantalla2.protocol("WH_DELETE_WINDOW", pantr)
     
@@ -343,8 +343,8 @@ def Ingresar():
 
 #Paths 
 
-SalidaRostros = "c:/Users/Genaro/Documents/SIMP2.0/Rostros"
-ChecadorRostros = "c:/Users/Genaro/Documents/SIMP2.0/Rostros/"
+SalidaRostros = "Rostros"
+ChecadorRostros = "Rostros"
 
 #variables
 paso = 0

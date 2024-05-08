@@ -1,0 +1,497 @@
+[
+    {
+        "label": "cv2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "cv2",
+        "description": "cv2",
+        "detail": "cv2",
+        "documentation": {}
+    },
+    {
+        "label": "mediapipe",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mediapipe",
+        "description": "mediapipe",
+        "detail": "mediapipe",
+        "documentation": {}
+    },
+    {
+        "label": "python",
+        "importPath": "mediapipe.tasks",
+        "description": "mediapipe.tasks",
+        "isExtraImport": true,
+        "detail": "mediapipe.tasks",
+        "documentation": {}
+    },
+    {
+        "label": "vision",
+        "importPath": "mediapipe.tasks.python",
+        "description": "mediapipe.tasks.python",
+        "isExtraImport": true,
+        "detail": "mediapipe.tasks.python",
+        "documentation": {}
+    },
+    {
+        "label": "face_recognition",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "face_recognition",
+        "description": "face_recognition",
+        "detail": "face_recognition",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "tkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "imutils",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "imutils",
+        "description": "imutils",
+        "detail": "imutils",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "open",
+        "importPath": "io",
+        "description": "io",
+        "isExtraImport": true,
+        "detail": "io",
+        "documentation": {}
+    },
+    {
+        "label": "pymysql",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pymysql",
+        "description": "pymysql",
+        "detail": "pymysql",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "CodeFun",
+        "kind": 2,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "def CodeFun():\n    global images, clases, listarf\n    #DB De las caras\n    images = []\n    clases = []\n    listarf = os.listdir(SalidaRostros)\n    for lin in listarf:\n        #leer imagen\n        imgdb = cv2.imread(f\"{SalidaRostros}/{lin}\")\n        #guardar imagen ",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "reiniciar_programa",
+        "kind": 2,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "def reiniciar_programa():\n    while True:\n        # Obten la hora actual\n        hora_actual = time.localtime().tm_hour\n        # Si es medianoche (00:00), reinicia el programa\n        if hora_actual == 0:\n            # Agrega aquí las acciones que deseas realizar antes de reiniciar\n            # ...\n            # Sale del bucle para evitar reinicios continuos\n            break",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "reinicio",
+        "kind": 2,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "def reinicio():\n    global CaraCod\n    ahora = datetime.datetime.now()\n        #print(ahora)\n    mmm = ahora.strftime(\"%H:%M\")\n        #print(mmm)\n            #print(type(mmm))\n    if mmm == \"16:22\":\n        pantalla2.destroy()\n        pantalla2 = Toplevel(pantalla)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "pantr",
+        "kind": 2,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "def pantr():\n    global pantalla, pantalla2, CaraCod, cap, lblVideo\n    print(\"si\")\n    pantalla2.destroy()\n    reinicio()\ndef reinicio():\n    global pantalla, pantalla2, CaraCod, cap, lblVideo\n    pantalla2 = Toplevel(pantalla)\n    pantalla2.title(\"Uso\")\n    pantalla2.geometry(\"1280x720\")",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "reinicio",
+        "kind": 2,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "def reinicio():\n    global pantalla, pantalla2, CaraCod, cap, lblVideo\n    pantalla2 = Toplevel(pantalla)\n    pantalla2.title(\"Uso\")\n    pantalla2.geometry(\"1280x720\")\n    #label de video\n    lblVideo = Label(pantalla2)\n    lblVideo.place(x=0, y=0)\n    #captura de video\n    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "Ingresar",
+        "kind": 2,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "def Ingresar():\n    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla, pantalla2, clases\n    #Checar video captura\n    if cap is not NONE:\n        ret, frame = cap.read()\n        #Redimencionar\n        frame = imutils.resize(frame, width = 1280)\n        #Frame rgb modificable\n        frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)\n        #Frame a mostrar y cambiar de color",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "SalidaRostros",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "SalidaRostros = \"Rostros\"\nChecadorRostros = \"Rostros\"\n#variables\npaso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "ChecadorRostros",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "ChecadorRostros = \"Rostros\"\n#variables\npaso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 ",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "paso",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "paso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 \n#herramienta de dibujo\nmpDibujo = mp.solutions.drawing_utils",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "parpadeo",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "parpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 \n#herramienta de dibujo\nmpDibujo = mp.solutions.drawing_utils\nconfiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "conteo",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "conteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 \n#herramienta de dibujo\nmpDibujo = mp.solutions.drawing_utils\nconfiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)\n#malla facial como objeto",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "rangoy",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "rangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 \n#herramienta de dibujo\nmpDibujo = mp.solutions.drawing_utils\nconfiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)\n#malla facial como objeto\nMafaObj =  mp.solutions.face_mesh\nMallaFacial = MafaObj.FaceMesh(max_num_faces = 1)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "rangox",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "rangox = 20\n#exactitud de deteccion\nDetect = 0.5 \n#herramienta de dibujo\nmpDibujo = mp.solutions.drawing_utils\nconfiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)\n#malla facial como objeto\nMafaObj =  mp.solutions.face_mesh\nMallaFacial = MafaObj.FaceMesh(max_num_faces = 1)\n#objeto detector de caras",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "Detect",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "Detect = 0.5 \n#herramienta de dibujo\nmpDibujo = mp.solutions.drawing_utils\nconfiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)\n#malla facial como objeto\nMafaObj =  mp.solutions.face_mesh\nMallaFacial = MafaObj.FaceMesh(max_num_faces = 1)\n#objeto detector de caras\nObjetoDet = mp.solutions.face_detection\nDetector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "mpDibujo",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "mpDibujo = mp.solutions.drawing_utils\nconfiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)\n#malla facial como objeto\nMafaObj =  mp.solutions.face_mesh\nMallaFacial = MafaObj.FaceMesh(max_num_faces = 1)\n#objeto detector de caras\nObjetoDet = mp.solutions.face_detection\nDetector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)\n#por si se ocupa informacion local\ninfo = []",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "confiDibujo",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "confiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)\n#malla facial como objeto\nMafaObj =  mp.solutions.face_mesh\nMallaFacial = MafaObj.FaceMesh(max_num_faces = 1)\n#objeto detector de caras\nObjetoDet = mp.solutions.face_detection\nDetector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)\n#por si se ocupa informacion local\ninfo = []\n#Ventana principal",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "MafaObj",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "MafaObj =  mp.solutions.face_mesh\nMallaFacial = MafaObj.FaceMesh(max_num_faces = 1)\n#objeto detector de caras\nObjetoDet = mp.solutions.face_detection\nDetector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)\n#por si se ocupa informacion local\ninfo = []\n#Ventana principal\npantalla = Tk()\npantalla.title(\"Reconocimiento\")",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "MallaFacial",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "MallaFacial = MafaObj.FaceMesh(max_num_faces = 1)\n#objeto detector de caras\nObjetoDet = mp.solutions.face_detection\nDetector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)\n#por si se ocupa informacion local\ninfo = []\n#Ventana principal\npantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "ObjetoDet",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "ObjetoDet = mp.solutions.face_detection\nDetector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)\n#por si se ocupa informacion local\ninfo = []\n#Ventana principal\npantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")\n\"\"\"\npantalla2 = Toplevel(pantalla)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "Detector",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "Detector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)\n#por si se ocupa informacion local\ninfo = []\n#Ventana principal\npantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")\n\"\"\"\npantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "info",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "info = []\n#Ventana principal\npantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")\n\"\"\"\npantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")\npantalla2.geometry(\"1280x720\")\n#label de video",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "pantalla",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "pantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")\n\"\"\"\npantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")\npantalla2.geometry(\"1280x720\")\n#label de video\nlblVideo = Label(pantalla2)\nlblVideo.place(x=0, y=0)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "pantalla2",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "pantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")\npantalla2.geometry(\"1280x720\")\n#label de video\nlblVideo = Label(pantalla2)\nlblVideo.place(x=0, y=0)\n#captura de video\ncap = cv2.VideoCapture(0, cv2.CAP_DSHOW)\ncap.set(3, 1280)\ncap.set(4, 720)",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "lblVideo",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "lblVideo = Label(pantalla2)\nlblVideo.place(x=0, y=0)\n#captura de video\ncap = cv2.VideoCapture(0, cv2.CAP_DSHOW)\ncap.set(3, 1280)\ncap.set(4, 720)\n\"\"\"\n#CaraCod = CodeFun()\n#Ingresar()\nreinicio()",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "cap",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)\ncap.set(3, 1280)\ncap.set(4, 720)\n\"\"\"\n#CaraCod = CodeFun()\n#Ingresar()\nreinicio()\npantalla.mainloop()",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "#CaraCod",
+        "kind": 5,
+        "importPath": "face-recognition",
+        "description": "face-recognition",
+        "peekOfCode": "#CaraCod = CodeFun()\n#Ingresar()\nreinicio()\npantalla.mainloop()",
+        "detail": "face-recognition",
+        "documentation": {}
+    },
+    {
+        "label": "PantallaReiniciadora",
+        "kind": 6,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "class PantallaReiniciadora:\n    def __init__(self, root):\n        self.root = root\n        self.root.title(\"Reconocimiento\")\n        self.root.geometry(\"1280x720\")\n        # Crea una ventana secundaria\n        self.pantalla2 = tk.Toplevel(self.root)\n        self.pantalla2.title(\"Uso\")\n        self.pantalla2.geometry(\"1280x720\")\n        # Programa el reinicio automático después de 10 segundos",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "Cual_Entra",
+        "kind": 2,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "def Cual_Entra():\n    global entrada\n    entrada = int(entrada)\n    if entrada == 1:\n        sql = \"SELECT * FROM `usuarios`\"\n        return sql\n    elif entrada == 2:\n        sql = \"SELECT * FROM `usuarios` WHERE nivel >= '2'\"\n        return sql\n    elif entrada == 3:",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "conexion",
+        "kind": 2,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "def conexion():\n    global entrada\n    conexion = pymysql.connect(\n        host=\"localhost\",\n        user=\"root\",\n        password=\"\",\n        db=\"caras\"\n    )\n    cursor = conexion.cursor()\n    sql = Cual_Entra()",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "descargar",
+        "kind": 2,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "def descargar():\n    global entrada\n    for search in conexion():\n        response = requests.get(search[2])\n        with open(f\"{search[1]}.png\", \"wb\") as file:\n            file.write(response.content)\ndescargar()\n\"\"\"\ndef pantr():\n    global pantalla, pantalla2",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "pantr",
+        "kind": 2,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "def pantr():\n    global pantalla, pantalla2\n    print(\"si\")\n    pantalla2.destroy()\n    time.sleep(10)\n    pantalla2 = Toplevel(pantalla)\n    pantalla2.title(\"Uso\")\n    pantalla2.geometry(\"1280x720\")\n    reinicio()\ndef reinicio():",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "reinicio",
+        "kind": 2,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "def reinicio():\n    global pantalla, pantalla2\n    time = 10\n    pantalla.after(time * 1000, pantr)\n    close = pantalla2.protocol(\"WH_DELETE_WINDOW\", pantr)\npantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")\npantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "entrada",
+        "kind": 5,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "entrada = input(\"Ingresa el nivel de entrada: \")\ndef Cual_Entra():\n    global entrada\n    entrada = int(entrada)\n    if entrada == 1:\n        sql = \"SELECT * FROM `usuarios`\"\n        return sql\n    elif entrada == 2:\n        sql = \"SELECT * FROM `usuarios` WHERE nivel >= '2'\"\n        return sql",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "pantalla",
+        "kind": 5,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "pantalla = Tk()\npantalla.title(\"Reconocimiento\")\npantalla.geometry(\"1280x720\")\npantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")\npantalla2.geometry(\"1280x720\")\n#tiempo()\nreinicio()\npantalla.mainloop()\n\"\"\"",
+        "detail": "reinicio",
+        "documentation": {}
+    },
+    {
+        "label": "pantalla2",
+        "kind": 5,
+        "importPath": "reinicio",
+        "description": "reinicio",
+        "peekOfCode": "pantalla2 = Toplevel(pantalla)\npantalla2.title(\"Uso\")\npantalla2.geometry(\"1280x720\")\n#tiempo()\nreinicio()\npantalla.mainloop()\n\"\"\"\n\"\"\"\nimport tkinter as tk\nimport time",
+        "detail": "reinicio",
+        "documentation": {}
+    }
+]
