@@ -34,5 +34,55 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <article>
+            <section class="data">
+                <h1>Datos del usuario</h1>
+                <br>
+                <h2>Nombre</h2>
+                <br>
+                <h2>Correo</h2>
+                <br>
+                <h2>Identificador</h2>
+                <br>
+                <h2>Area</h2>
+                <br>
+            </section>
+
+            <section class="data">
+                <form method="post" action="actualizacion">
+                    <h1>Modificar al usuario</h1>
+                    <br>
+                    <h2>Nombre</h2>
+                    <br>
+                    <input type="text" id="NA">
+                    <br><br>
+                    <h2>Correo</h2>
+                    <br>
+                    <input type="text" id="CA">
+                    <br><br>
+                    <h2>Identificador</h2>
+                    <br>
+                    <input type="text" id="IDA">
+                    <br><br>
+                    <h2>Area</h2>
+                    <br>
+                    <select>
+                        <option value="Docente">Docente</option>
+                        <option value="Alumno" selected>Alumno</option>
+                        <option value="Academico">Academico</option>
+                        <option value="Seguridad">Seguridad</option>
+                        <option value="Administracion">Administracion</option>
+                        <option value="Rector">Rector</option>
+                        <option value="Director">Director</option>
+                        <option value="Visitante">Visitante</option>
+                        <option value="Proveedor">Proveedor</option>
+                    </select>
+                    <br><br><br>
+                    <input type="submit" value="Modificar">
+                </form>
+            </section>
+        </article>
+    </main>
 </body>
 </html>
