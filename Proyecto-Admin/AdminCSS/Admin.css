@@ -12,4 +12,229 @@ body{
     height: 100vh;
     display: grid;
     background-color:white;
+    box-sizing: border-box;
 }
+
+main{
+    width: 100vw;
+    display: inline-block;
+}
+
+#feed{
+    width: 40vw;
+    height: 868px;
+    float: left;
+    justify-content: center;
+    text-align: center;
+    border-right: 1px dashed dodgerblue;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#opc{
+    width: 60vw;
+    float: right;
+    height: 868px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#feed h1{
+    padding-top: 32px;
+    padding-bottom: 32px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: mediumblue;
+    transition: 0.5s;
+}
+
+#feed h1:hover{
+    transform: scale(1.4);
+    color: mediumblue;
+    transition: 0.5s;
+}
+
+#foto-item #fotoUsuario{
+    height: 144px;
+    width: auto;
+    /* left: 50%;
+    top: 50%;
+    transform: translate(-73%, 0%); */
+    /* margin-left: 190px; */
+}
+
+#info{
+    top: 50%;
+    left: 50%;
+    transform: translate(0%, 25%);
+}
+
+#info #fotoUsuario{
+    border-radius: 50%;
+    height: 144px;
+    width: auto;
+    border: 1px solid cornflowerblue;
+    transition: 0.5s;
+}
+
+#N, #ID, #C{
+    padding-top: 32px;
+    color: navy;
+    transition: 0.5s;
+}
+
+#info #fotoUsuario:hover{
+    transform: scale(1.2);
+    border: 1px dashed royalblue;
+    transition: 1s;
+}
+
+#N:hover{
+    font-family: 'Times New Roman', Times, serif;
+    transform: scale(1.2);
+    color: mediumblue;
+    transition: 1s;
+}
+
+#ID:hover{
+    font-family: 'Times New Roman', Times, serif;
+    transform: scale(1.2);
+    color: mediumblue;
+    transition: 1s;
+}
+
+#C:hover{
+    font-family: 'Times New Roman', Times, serif;
+    transform: scale(1.2);
+    color: mediumblue;
+    transition: 1s ease-in-out;
+}
+
+
+.Busqueda{
+    background-color: white;
+    border: none;
+    border-top: 1px solid ghostwhite;
+    border-left: 1px solid ghostwhite;
+    border-right: 1px solid ghostwhite;
+    width: 500px;
+    height: 24px;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    border-radius: 6px;
+    height: 24px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 64px;
+    margin-left: 320px;
+    box-shadow: 0 3px 2px gainsboro;
+}
+
+.Busqueda input{
+    flex: 1;
+    height: 24px;
+    padding: 10px 10px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.Busqueda input i{
+    width: 24px;
+    color: blue;
+}
+
+.Busqueda button{
+    width: 24px;
+    border: none;
+    border-left: 1px solid lightsteelblue;
+    padding: 14px 8px;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.Busqueda input::placeholder{
+    color: lightsteelblue;
+}
+
+#tabla{
+    width: 720px;
+    position: static;
+    left: 50%;
+    top: 50%;
+    transform: translate(30%, 5%);
+}
+
+.usuarios{
+    width: 700px;
+    box-shadow: 0px 4px 2px lightsteelblue;
+    border-collapse: collapse;
+    border-spacing: 0;
+    transition: 0.5s;
+    display: block;
+}
+
+th, tr, td{
+    height: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    color: steelblue;
+    border-bottom: 1px solid lightsteelblue;
+    border-top: 1px solid rgb(190, 211, 238);
+    padding-left: 4px;
+    width: 292px;
+    padding-right: 4px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    overflow: hidden;
+}
+
+#hp{
+    width: 92px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.ud{
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    border-right: 1px solid lightsteelblue;
+}
+
+.usuarios tbody{
+    display: block;
+    max-height: 480px;
+    overflow-y: scroll;
+}
+
+.Perfil{
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: skyblue;
+    transition: 0.5s;
+    font-size: 12px;
+}
+
+.Perfil:hover{
+    color: mediumblue;
+    font-size: 13px;
+    transition: 0.5s;
+}
+
