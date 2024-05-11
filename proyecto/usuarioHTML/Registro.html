@@ -4,7 +4,7 @@
     <title>Registro</title>
     <link rel="stylesheet" href="../usuarioCSS/Registro_E_Inicio_De_Sesion.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="FuncionesJS.js"></script>
+    <script type="text/javascript" src="../usuarioJS/FuncionesJS.js"></script>
 </head>
 
 <body>
@@ -41,10 +41,10 @@
                 <input type="email" id="C" required placeholder="Correo electronico">
                 <br><br>
                 <label id="idLabel" for="checkID">¿Cuenta con un Identificador?</label>
-                <input type="checkbox" id="checkID">
+                <input type="checkbox" id="checkID" onclick="check()">
                 <br><br>
                 <label class="label" for="ID">Identificador</label><br>
-                <input type="text" id="ID" required placeholder="Identificador">
+                <input type="text" id="ID" required placeholder="Identificador" readonly>
                 <br><br>
                 <label class="label" for="P">Contraseña</label><br>
                 <input type="password" id="P" required placeholder="Ingrese contraseña" maxlength="10" minlength="8">
