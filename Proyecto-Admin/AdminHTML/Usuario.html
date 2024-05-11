@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario Administrador</title>
     <link rel="stylesheet" type="text/css" href="../AdminCSS/Admin.css">
+    <script src="https://kit.fontawesome.com/16f865f1da.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <header class="header">
         <article>
@@ -54,19 +56,52 @@
 -->
 
     <main>
-        <article>
+
+        <article id="feed">
             <section id="info">
                 <h1>BIENVENIDO</h1>
-                <div id="foto-item"><img id="fotoUsuario" src="../Imagenes/LOGO-SIMP-Photoroom.png"></div>
-                <div id="config">
-                <a href="ConfigurarDatos.html"><img src="../Imagenes/configuraciones.png" id="cf"></a>
+                <div id="foto-item">
+                    <img id="fotoUsuario" src="../Imagenes/LOGO-SIMP-Photoroom.png">
                 </div>
-                <!-- <a href="ConfigurarDatos.html"><input type="button" value="Configuracion" id="config"></a> -->
                 <p id="N">Nombre de ejemplo</p>
                 <p id="ID">ID de ejemplo</p>
                 <p id="C">Correo de ejemplo</p>
             </section>
         </article>
+
+        <article id="opc">
+            <section>
+                <!-- <div class="Busqueda">
+                    <input type="text" placeholder="Busqueda" id="br">
+                <button id="btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div> -->
+                <form method="post" action="#" class="Busqueda">
+                    <input type="text" placeholder="Buscar usuarios">
+                    <button type="submit" value="busqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <br>
+                <div id="tabla">
+                    <table class="usuarios">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th id="hp">Ver perfil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ud">n</td>
+                                <td class="ud">n</td>
+                                <td><button class="Perfil">Ingresar al perfil</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </article>
+
     </main>
+
 </body>
 </html>
