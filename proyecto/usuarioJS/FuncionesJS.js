@@ -25,6 +25,24 @@ P1 Y P2: Variables paa contener los valores de P-New y P-New2 respectivamente
 
 */
 
+/* document.getElementById('checkID').addEventListener('change', (event) =>{
+    if(event.target.checked){
+        document.getElementById('ID').readOnly = false;
+    }
+}) */
+
+function check(){
+    var c = document.getElementById("checkID");
+    var id = document.getElementById('ID');
+
+    if(c.checked){
+        id.removeAttribute('readonly');
+    }
+    else{
+        id.readOnly = true;
+    }
+}
+
 function comprobacion(){
     let P1 = document.getElementById("P-New").value
     let P2 = document.getElementById("P-New2").value
