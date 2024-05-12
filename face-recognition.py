@@ -10,12 +10,12 @@ import math
 from tkinter import *
 from PIL import Image, ImageTk
 import imutils
-import time
-import datetime
 import requests
 import pymysql
 
-
+def cerrar():
+    if Entry.winfo_viewable() == 1:
+        print()
 
 def VerDir():
 
@@ -124,59 +124,6 @@ def CodeFun():
         listacod.append(cod)
 
     return 
-
-
-
-"""
-def reiniciar_programa():
-    while True:
-        # Obten la hora actual
-        hora_actual = time.localtime().tm_hour
-
-        # Si es medianoche (00:00), reinicia el programa
-        if hora_actual == 0:
-            
-            # Agrega aquí las acciones que deseas realizar antes de reiniciar
-            # ...
-
-            # Sale del bucle para evitar reinicios continuos
-            break
-
-        # Espera un minuto antes de verificar nuevamente
-        time.sleep(60)
-
-
-
-
-def reinicio():
-
-    global CaraCod
-
-    ahora = datetime.datetime.now()
-
-        #print(ahora)
-
-    mmm = ahora.strftime("%H:%M")
-        #print(mmm)
-
-            #print(type(mmm))
-
-    if mmm == "16:22":
-
-        pantalla2.destroy()
-        pantalla2 = Toplevel(pantalla)
-        pantalla2.title("Uso")
-        pantalla2.geometry("1280x720")
-
-                
-            #label de video
-        lblVideo = Label(pantalla2)
-        lblVideo.place(x=0, y=0)
-
-        print("entra")
-        CaraCod = CodeFun()    
-        Ingresar()           
-"""
         
 def pantr():
 
@@ -210,9 +157,7 @@ def reinicio():
     Ingresar()
 
     time = 60
-    pantalla.after(time * 1000, pantr)
-    close = pantalla2.protocol("WH_DELETE_WINDOW", pantr)
-    
+    pantalla.after(time * 1000, pantr)   
 
 #Funcion Sing
 
@@ -463,23 +408,6 @@ info = []
 pantalla = Tk()
 pantalla.title("Reconocimiento")
 pantalla.geometry("1280x720")
-
-"""
-pantalla2 = Toplevel(pantalla)
-pantalla2.title("Uso")
-pantalla2.geometry("1280x720")
-    
-#label de video
-lblVideo = Label(pantalla2)
-lblVideo.place(x=0, y=0)
-
-
-#captura de video
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-cap.set(3, 1280)
-cap.set(4, 720)
-"""
-
 
 #CaraCod = CodeFun()
 #Ingresar()

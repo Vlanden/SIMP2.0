@@ -10,6 +10,46 @@ import pymysql
 import requests
 import os
 
+import tkinter as tk
+from tkinter import messagebox
+
+class App:
+    def __init__(self, root):
+        self.root = root
+        self.password = "si"  # Puedes cambiar esto a la contraseña que desees
+
+        self.label = tk.Label(root, text="Por favor, ingresa la contraseña para desbloquear:")
+        self.label.pack()
+
+        self.entry = tk.Entry(root)
+        self.entry.pack()
+
+        self.button = tk.Button(root, text="Desbloquear", command=self.check_password)
+        self.button.pack()
+
+    def check_password(self):
+        if self.entry.get() == self.password:
+            messagebox.showinfo("Info", "Contraseña correcta. La aplicación se ha desbloqueado.")
+            self.label.pack_forget()
+            self.entry.pack_forget()
+            self.button.pack_forget()
+        else:
+            messagebox.showerror("Error", "Contraseña incorrecta. Inténtalo de nuevo.")
+
+    def on_closing(self):
+        if not self.entry.winfo_viewable():
+            if messagebox.askokcancel("Salir", "¿Estás seguro de que quieres salir?"):
+                self.root.destroy()
+        else:
+            messagebox.showinfo("Info", "Por favor, desbloquea la aplicación para poder cerrarla.")
+
+root = tk.Tk()
+app = App(root)
+
+root.protocol("WM_DELETE_WINDOW", app.on_closing)
+root.mainloop()
+
+"""
 def VerDir():
 
     if os.path.exists("Rostros") == False:
@@ -77,7 +117,7 @@ def descargar():
             file.write(response.content)
 
 descargar()
-
+"""
 """
 def pantr():
 
