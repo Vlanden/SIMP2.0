@@ -12,6 +12,87 @@ from PIL import Image, ImageTk
 import imutils
 import time
 import datetime
+import requests
+import pymysql
+
+
+
+def VerDir():
+
+    if os.path.exists("Rostros") == False:
+
+        os.mkdir("Rostros")
+        Salida = os.getcwd()
+
+        Salida = Salida + "/Rostros"
+        Salida2 = Salida + "/Rostros/"
+        ListPaths = []
+        ListPaths = [Salida, Salida2]
+        return ListPaths
+    else:
+        Salida = os.getcwd()
+        Salida = Salida + "/Rostros"
+        Salida2 = Salida + "/"
+        ListPaths = [Salida, Salida2]
+        return ListPaths
+
+        
+
+
+def Cual_Entra():
+
+    global entrada
+    entrada = input("Ingresa el nivel de entrada: ")
+    entrada = int(entrada)
+
+    if entrada == 1:
+        sql = "SELECT * FROM `usuarios`"
+        return sql
+    elif entrada == 2:
+        sql = "SELECT * FROM `usuarios` WHERE nivel >= '2'"
+        return sql
+    elif entrada == 3:
+        sql = "SELECT * FROM `usuarios` WHERE nivel >= '3'"
+        return sql
+    elif entrada == 5:
+        sql = "SELECT * FROM `usuarios` WHERE nivel >= '5'"
+        return sql        
+    else:
+        print("no se ingreso nivel de acceso")
+
+
+def conexion():
+
+    global entrada
+    conexion = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="",
+        db="caras"
+    )
+
+    cursor = conexion.cursor()
+
+    sql = Cual_Entra()
+
+    cursor.execute(sql)
+
+    lista = cursor.fetchall()
+
+    return lista
+
+
+
+def descargar():
+
+    global entrada
+    
+    for search in conexion():
+
+        response = requests.get(search[2])
+
+        with open(f"Rostros/{search[1]}.png", "wb") as file:
+            file.write(response.content)
 
 
 #Codificar iamgenes
@@ -339,12 +420,13 @@ def Ingresar():
     else:
         print("no jala")
         cap.release()
-
-
+    
 #Paths 
 
-SalidaRostros = "Rostros"
-ChecadorRostros = "Rostros"
+Ten = VerDir()
+print(Ten)
+SalidaRostros = Ten[0]
+ChecadorRostros = Ten[1]
 
 #variables
 paso = 0
@@ -401,6 +483,7 @@ cap.set(4, 720)
 
 #CaraCod = CodeFun()
 #Ingresar()
+descargar()
 reinicio()
 pantalla.mainloop()
 

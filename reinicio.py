@@ -8,8 +8,22 @@ import datetime
 from io import open
 import pymysql
 import requests
+import os
 
-entrada = input("Ingresa el nivel de entrada: ")
+def VerDir():
+
+    if os.path.exists("Rostros") == False:
+
+        os.mkdir("Rostros")
+        Salida = os.getcwd()
+        Salida = Salida + "/Rostros"
+        entrada = input("Ingresa el nivel de entrada: ")
+        return entrada
+
+    else:
+        entrada = input("Ingresa el nivel de entrada: ")
+        return entrada
+
 
 def Cual_Entra():
 
@@ -54,11 +68,12 @@ def conexion():
 def descargar():
 
     global entrada
+    entrada = VerDir()
     for search in conexion():
 
         response = requests.get(search[2])
 
-        with open(f"{search[1]}.png", "wb") as file:
+        with open(f"Rostros/{search[1]}.png", "wb") as file:
             file.write(response.content)
 
 descargar()
