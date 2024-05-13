@@ -2,12 +2,14 @@
 session_start();
 include_once "conexionBD.php";
 
+$name=$_POST['name'];
 $email=$_POST["correo"];
+$id=$_POST["ID"];//Verificar identificador del id
 $encrypt_pass=$_POST["pass"];
 $email=stripcslashes($email);
 $encrypt_pass=stripcslashes($encrypt_pass);
 $email = mysqli_real_escape_string($conexion, $email);
-$name=$_POST['name'];
+
 $encrypt_pass = password_hash($encrypt_pass, PASSWORD_DEFAULT,['cost' => 15]);
 if ( !empty($email) ) {
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -23,28 +25,18 @@ if ( !empty($email) ) {
                 $img_explode = explode('.', $img_name);
                 $img_ext = end($img_explode);
 
-<<<<<<< Updated upstream
-                $extensions = ["jpeg", "PNG", "jpg"];
-                if (in_array($img_ext, $extensions) === true) {
-                    $types = ["image/jpeg", "image/jpg", "image/png"];
-                    if (in_array($img_type, $types) === true) {
-=======
-            $img_explode = explode('.', $img_name);
-            $img_ext = end($img_explode);
-
             $extensions = ["jpeg", "PNG", "jpg"];
             $types = ["image/jpeg", "image/jpg", "image/png"];
             if (in_array($img_ext, $extensions) === true && in_array($img_type, $types) === true) {
                     
                     $img_name = $name .'.png';
-                    if (move_uploaded_file($tmp_name, "C:/Users/PC/Documents/GitHub/SIMP2.0/Rostros/" . $img_name)) {
+                    if (move_uploaded_file($tmp_name, "\SIMP2.0\Rostro" . $img_name)) {
                         $encrypt_pass = password_hash($_POST['pass'], PASSWORD_DEFAULT,['cost' => 15]);
->>>>>>> Stashed changes
                         
                         $img_name = $name .'.png';
                         if (move_uploaded_file($tmp_name, "images/" . $img_name)) {
-                            $insert_query = mysqli_query($conexion, "INSERT INTO simp(correo, pass, img )
-                                VALUES ('$email', '$encrypt_pass', '$img_name')");
+                            $insert_query = mysqli_query($conexion, "INSERT INTO simp(nom, correo, id, pass, img )
+                                VALUES ('$name', '$email', '$id', '$encrypt_pass', '$img_name')");//Verificar identificador del id
                                 
                             if ($insert_query) {
                                 $select_sql2 = mysqli_query($conexion, "SELECT * FROM simp WHERE correo = '{$email}'");
