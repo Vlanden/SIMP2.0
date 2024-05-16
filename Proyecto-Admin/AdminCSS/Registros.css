@@ -19,8 +19,8 @@ body{
     width: 540px;
     border-style: solid;
     border-radius: 24px;
-    border-width: 2px;
-    border-color: midnightblue;
+    border: none;
+    box-shadow: 0px 0px 2px midnightblue;
     /* border-image: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 71%, rgba(0,44,255,1) 100%) 1; */
 }
 

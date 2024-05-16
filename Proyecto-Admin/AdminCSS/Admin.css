@@ -182,27 +182,39 @@ main{
 th, tr, td{
     height: 8px;
     font-family: 'Times New Roman', Times, serif;
-    padding-bottom: 12px;
-    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     color: steelblue;
     border-bottom: 1px solid lightsteelblue;
     border-top: 1px solid rgb(190, 211, 238);
-    padding-left: 4px;
     width: 292px;
-    padding-right: 4px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     overflow: hidden;
+}
+
+td{
+    border-right: 1px solid lightsteelblue;
+}
+
+.usuarios #nu{
+    padding-right: 24px;
+}
+
+.usuarios #cu{
+    padding-right: 94px;
 }
 
 #hp{
     width: 92px;
-    padding-left: 4px;
-    padding-right: 4px;
     padding-bottom: 10px;
     padding-top: 10px;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-right: 80px;
+}
+
+#vp{
+    width: 92px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 136px;
 }
 
 .ud{
