@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../AdminCSS/Usuario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Briem+Hand:wght@100..900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="../AdminJS/Funciones.js"></script>
     <title>Usuario</title>
 </head>
 <body>
     <header class="header">
         <article>
             <section class="logo" >
-                <a href="datos.html"><img src="../Imagenes/LOGO-SIMP-Photoroom.png" alt="somos simp"></a>
+                <a href="../AdminHTML/Usuario.html"><img src="../Imagenes/LOGO-SIMP-Photoroom.png" alt="somos simp"></a>
             </section>
         </article>
         <nav class="navbar">
@@ -35,51 +38,65 @@
         </nav>
     </header>
     <main>
-        <article>
+        <article id="contenedor">
             <section class="data">
-                <h1>Datos del usuario</h1>
-                <br>
-                <h2>Nombre</h2>
-                <br>
-                <h2>Correo</h2>
-                <br>
-                <h2>Identificador</h2>
-                <br>
-                <h2>Area</h2>
-                <br>
+                <div class="contenedor-Int">
+                    <form method="post" action="borrar.php">
+                    <h1 class="T">Datos del usuario</h1>
+                    <br>
+                    <h2 class="t">Nombre</h2>
+                    <br>
+                    <h2 class="t">Correo</h2>
+                    <br>
+                    <h2 class="t">Identificador</h2>
+                    <br>
+                    <h2 class="t">Area</h2>
+                    <br>
+                    <h2 class="t">Verificacion actual</h2>
+                    <br>
+                    <p class="pt">Alta/En Espera/Baja</p>
+                    <br>
+                    <label for="CID"><h2 class="t">Si se le ha dado de baja, borre el perfil</h2></label>
+                    <input type="checkbox" id="CID" onclick="check()">
+                    <br>
+                        <input type="submit" value="Borrar" disabled id="borrar">
+                    </form>
+                </div>
             </section>
 
             <section class="data">
-                <form method="post" action="actualizacion">
-                    <h1>Modificar al usuario</h1>
-                    <br>
-                    <h2>Nombre</h2>
-                    <br>
-                    <input type="text" id="NA">
-                    <br><br>
-                    <h2>Correo</h2>
-                    <br>
-                    <input type="text" id="CA">
-                    <br><br>
-                    <h2>Identificador</h2>
-                    <br>
-                    <input type="text" id="IDA">
-                    <br><br>
-                    <h2>Area</h2>
-                    <br>
-                    <select>
-                        <option value="Docente">Docente</option>
-                        <option value="Alumno" selected>Alumno</option>
-                        <option value="Academico">Academico</option>
-                        <option value="Seguridad">Seguridad</option>
-                        <option value="Administracion">Administracion</option>
-                        <option value="Rector">Rector</option>
-                        <option value="Director">Director</option>
-                        <option value="Visitante">Visitante</option>
-                        <option value="Proveedor">Proveedor</option>
-                    </select>
-                    <br><br><br>
-                    <input type="submit" value="Modificar">
+                <div class="contenedor-Int">
+                    <form method="post" action="actualizacion">
+                        <h1 class="T">Modificar al usuario</h1>
+                        <br>
+                        <label for="NA"><h2 class="t">Nombre</h2></label>
+                        <br>
+                        <input type="text" id="NA" placeholder="Nombre actualizado">
+                        <br><br>
+                        <label for="CA"><h2 class="t">Correo</h2></label>
+                        <br>
+                        <input type="text" id="CA" placeholder="Correo actualizado">
+                        <br><br>
+                        <label for="IDA"><h2 class="t">Identificador</h2></label>
+                        <br>
+                        <input type="text" id="IDA" placeholder="ID actualizada">
+                        <br><br>
+                        <h2 class="t">Area</h2>
+                        <br>
+                        <select>
+                            <option value="Docente">Docente</option>
+                            <option value="Alumno" selected>Alumno</option>
+                            <option value="Academico">Academico</option>
+                            <option value="Seguridad">Seguridad</option>
+                            <option value="Administracion">Administracion</option>
+                            <option value="Rector">Rector</option>
+                            <option value="Director">Director</option>
+                            <option value="Visitante">Visitante</option>
+                            <option value="Proveedor">Proveedor</option>
+                        </select>
+                        <br><br><br>
+                        <input type="submit" value="Modificar">
+                    </div>
                 </form>
             </section>
         </article>

@@ -6,13 +6,14 @@
     <title>Usuario Administrador</title>
     <link rel="stylesheet" type="text/css" href="../AdminCSS/Admin.css">
     <script src="https://kit.fontawesome.com/16f865f1da.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../AdminJS/FuncionesJS.js"></script>
 </head>
 
 <body>
     <header class="header">
         <article>
             <section class="logo" >
-                <a href="datos.html"><img src="../Imagenes/LOGO-SIMP-Photoroom.png" alt="somos simp"></a>
+                <a href="../AdminHTML/Usuario.html"><img src="../Imagenes/LOGO-SIMP-Photoroom.png" alt="somos simp"></a>
             </section>
         </article>
         <nav class="navbar">
@@ -84,8 +85,9 @@
                     <table class="usuarios">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
+                                <th  id="nu">Nombre</th>
+                                <th id="cu">Correo</th>
+                                <th id="vp">Validar perfil</th>
                                 <th id="hp">Ver perfil</th>
                             </tr>
                         </thead>
@@ -93,6 +95,7 @@
                             <tr>
                                 <td class="ud">n</td>
                                 <td class="ud">n</td>
+                                <td><button class="Perfil" onclick="location.href='verfificacion.php'">Validar perfil</button></td>
                                 <td><button class="Perfil" onclick="location.href='../AdminHTML/Usuarios.html'">Ingresar al perfil</button></td>
                             </tr>
                         </tbody>
