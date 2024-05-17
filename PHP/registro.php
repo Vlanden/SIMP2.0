@@ -6,7 +6,7 @@ include_once "conexionBD.php";
 $name=$_POST['name'];
 $email=$_POST["correo"];
 
-
+/*
 // Función para generar un ID único
 function generarIDUnico($conexion) {
     $id = uniqid('user_');
@@ -30,7 +30,9 @@ function generarIDUnico($conexion) {
 
 // Verificar si se ha enviado un ID
 $id = isset($_POST['ID']) ? $_POST['ID'] : generarIDUnico($conexion);
+*/
 
+$id =$_POST["ID"];
 
 $encrypt_pass=$_POST["pass"];
 $confirmar_pass = $_POST['confirmar_pass'];
