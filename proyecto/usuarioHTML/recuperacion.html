@@ -12,7 +12,7 @@
     <main>
         <article>
             <section class="Registro">
-                    <form action="recupera.php" method="post" id="formRe" enctype="multipart/form-data">
+                    <form action="../php/recupera.php" method="post" id="formRe" enctype="multipart/form-data">
                         <!--
                             La idea es que el php redirija al html de "Inicio".
 
@@ -24,13 +24,13 @@
                         <h1>Recuperacion</h1>
                         <br><br>
                         <label class="label" for="C">Correo</label><br>
-                        <input type="email" id="C" required placeholder="Correo electronico">
+                        <input type="email" id="C" name="email" required placeholder="Correo electronico">
                         <br><br>
                         <label class="label" for="P-New">Contraseña</label><br>
-                        <input type="password" id="P-New" required placeholder="Ingrese su nueva contraseña">
+                        <input type="password" id="P-New" name="pass" required placeholder="Ingrese su nueva contraseña">
                         <br><br>
                         <label class="label" for="P-New2">Contraseña</label><br>
-                        <input type="password" id="P-New2" required placeholder="Reingrese la nueva contraseña">
+                        <input type="password" id="P-New2" name="pass2" required placeholder="Reingrese la nueva contraseña">
                         <br><br><br>
                         <div id="link"><a href="InicioSesion.html">Haga click para volver</a>
                         </div>

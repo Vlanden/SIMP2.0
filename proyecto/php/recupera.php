@@ -1,18 +1,18 @@
 <?php
-    require_once ("php/config.php");
-    $user = $_POST['c'];
-    $pass=$_POST['P-New'];
-    $pass2=$_POST['-New2'];
+    require_once ("conexionBD.php");
+    $user = $_POST['email'];
+    $pass=$_POST['pass'];
+    $pass2=$_POST['pass2'];
 
     if(strcmp($pass,$pass2)==0){
         $passNew=$pass2;
-        $encrypt_pass =md5($passNew);
-       $sql="UPDATE users SET password = '$encrypt_pass' WHERE email = '$user';";
-        $envio = mysqli_query($conn, $sql);
+        $encrypt_pass = password_hash($passNew, PASSWORD_DEFAULT,['cost' => 15]);
+       $sql="UPDATE simp SET pass = '$encrypt_pass' WHERE correo = '$user';";
+        $envio = mysqli_query($conexion, $sql);
         if(!$envio) {
-            echo "Error: " . mysqli_error($conn);
+            echo "Error: " . mysqli_error($conexion);
         } else {
-            header('Location:proyecto\usuarioHTML\InicioSesion.html');
+            header('Location:../usuarioHTML/InicioSesion.html');
         }
     }
     
