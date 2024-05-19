@@ -5,6 +5,9 @@ include_once "conexionBD.php";
 // Recoger los datos del formulario
 $name=$_POST['name'];
 $email=$_POST["correo"];
+$id = isset($_POST['ID']) ? $_POST['ID'] : null;
+$encrypt_pass=$_POST["pass"];
+$confirmar_pass = $_POST['confirmar_pass'];
 
 /*
 // Función para generar un ID único
@@ -32,10 +35,7 @@ function generarIDUnico($conexion) {
 $id = isset($_POST['ID']) ? $_POST['ID'] : generarIDUnico($conexion);
 */
 
-$id =$_POST["ID"];
 
-$encrypt_pass=$_POST["pass"];
-$confirmar_pass = $_POST['confirmar_pass'];
 
 $email=stripcslashes($email);
 $encrypt_pass=stripcslashes($encrypt_pass);
@@ -82,15 +82,21 @@ if ( !empty($email) ) {
                         
                         $img_name = $name .'.png';
                         if (move_uploaded_file($tmp_name, "images/" . $img_name)) {
-                            $insert_query = mysqli_query($conexion, "INSERT INTO simp(nom, correo, id, pass, img )
-                                VALUES ('$name', '$email', '$id', '$encrypt_pass', '$img_name')");//Verificar identificador del id
-                                
+                            if ($id !== null) {
+                                // Insertar con ID
+                                $insert_query = mysqli_query($conexion, "INSERT INTO simp(nom, correo, id, pass, img)
+                                    VALUES ('$name', '$email', '$id', '$encrypt_pass', '$img_name')");
+                            } else {
+                                // Insertar sin ID
+                                $insert_query = mysqli_query($conexion, "INSERT INTO simp(nom, correo, pass, img)
+                                    VALUES ('$name', '$email', '$encrypt_pass', '$img_name')");
+                            }
                             if ($insert_query) {
                                 $select_sql2 = mysqli_query($conexion, "SELECT * FROM simp WHERE correo = '{$email}'");
                                 if (mysqli_num_rows($select_sql2) > 0) {
                                     $result = mysqli_fetch_assoc($select_sql2);
                                     $_SESSION['unique_id'] = $result['unique_id'];
-                                    header("Location:google.html");
+                                    header("Location:proyecto\usuarioHTML\InicioSesion.html");
                                     echo "Proceso Exitoso";
                                 }{
                                 echo "Algo salió mal. ¡Inténtalo de nuevo!";
