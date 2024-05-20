@@ -328,10 +328,10 @@ def ContParpadeos():
 
     #Nota: hay q modificar el parametro de longitudes dependiendo del lugar donde se instale 
     #y la distancia a la que estara el usuario
-    if longitud1 <= 8 and longitud2 <= 8 and parpadeo == False:
+    if longitud1 <= 10 and longitud2 <= 10 and parpadeo == False:
         conteo = conteo + 1
         parpadeo = True
-    elif longitud1 > 8 and longitud2 > 8 and parpadeo == True:
+    elif longitud1 > 10 and longitud2 > 10 and parpadeo == True:
         parpadeo = False
 
     cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
