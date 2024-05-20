@@ -160,15 +160,99 @@ def reinicio():
     time = 90
     pantalla.after(time * 1000, pantr)  
 
+def ConvVideo():
+
+    global im, img, lblVideo, frame
+    #Convertir video
+    im = Image.fromarray(frame)
+    img = ImageTk.PhotoImage(image = im)
+
+    #Mostrar video
+    lblVideo.configure(image = img)
+    lblVideo.image = img
+    lblVideo.after(10, Ingresar)
+
+def ProcMalla():
+
+    global longitud1, longitud2, x5, x6, x7, x8, rostrosDet, an, al
+
+    #Agregar malla facial
+    res = MallaFacial.process(frameRGB)
+
+    #Lista de resultados
+
+    px = []
+    py = []
+    lista = []
+
+    if res.multi_face_landmarks:
+                
+        #Extraer mallas faciales
+                
+        for rostros in res.multi_face_landmarks:
+                    
+            #Dibujar
+            #mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACEMESH_TESSELATION, confiDibujo, confiDibujo)
+            # nota: nesecita tener buena iluminacion para ejecutarse
+                    
+            #Extraer puntos
+                    
+            for id, puntos in enumerate(rostros.landmark):   #no entra al for
+                        
+                #Info de la imagen
+                al, an, ni = frame.shape
+                x = int(puntos.x * an)
+                y = int(puntos.y *al)
+                px.append(x)
+                py.append(y)
+                lista.append([id, x, y])
+
+                #Confirmar puntos
+                if len(lista) == 468:
+
+                    #Ojo derecho
+                    x1, y1 = lista[145][1:]
+                    x2, y2 = lista[159][1:]
+                    longitud1 = math.hypot(x2-x1, y2-y1)                          
+
+                    #Ojo izquierdo
+                    x3, y3 = lista[374][1:]
+                    x4, y4 = lista[386][1:]
+                    longitud2 = math.hypot(x4-x3, y4-y3)
+
+                    #parietal derecho
+                    x5, y5 = lista[139][1:]
+
+                    #Parietal izquierdo
+                    x6, y6 = lista[368][1:]
+
+                    #ceja derecha
+                    x7, y7 = lista[70][1:]
+
+                    #ceja izquierda
+                    x8, y8 = lista[300][1:]
+
+                    cv2.circle(frame, (x1, y1), 2, (255,0,0), cv2.FILLED)
+                    
+                    
+                    #detector de rostros
+
+                    
+                    BbDetec()
+                    
+                        
+
 def BbDetec():
 
-    global xi, yi, anc, alt, Detect, an, al
+    global xi, yi, anc, alt, Detect, an, al, rostrosDet
     
     rostrosDet = Detector.process(frameRGB)
 
     if rostrosDet.detections is not NONE:
 
         for cara in rostrosDet.detections:
+
+            
 
             #info del recuadro : ID, BBox, Score
             score = cara.score
@@ -244,10 +328,10 @@ def ContParpadeos():
 
     #Nota: hay q modificar el parametro de longitudes dependiendo del lugar donde se instale 
     #y la distancia a la que estara el usuario
-    if longitud1 <= 10 and longitud2 <= 10 and parpadeo == False:
+    if longitud1 <= 8 and longitud2 <= 8 and parpadeo == False:
         conteo = conteo + 1
         parpadeo = True
-    elif longitud1 > 10 and longitud2 > 10 and parpadeo == True:
+    elif longitud1 > 8 and longitud2 > 8 and parpadeo == True:
         parpadeo = False
 
     cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
@@ -293,12 +377,11 @@ def BuscarCaras():
 
 def Ingresar():
     global cap,  conteo, parpadeo, img_info, paso, ret, frame, frameRGB, pantalla, pantalla2, clases, xi,yi,anc,alt
-    global longitud1, longitud2, x5, x6, x7, x8, rostrosDet, an, al
+    
 
     #Checar video captura
     if cap is not NONE:
         
-
         ret, frame = cap.read()
 
         #Redimencionar
@@ -312,82 +395,13 @@ def Ingresar():
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         if ret == True:
-            #
-            
-            #Agregar malla facial
-            res = MallaFacial.process(frameRGB)
+            try:
+                ProcMalla()
+            except:
+                Ingresar()
 
-            #Lista de resultados
-
-            px = []
-            py = []
-            lista = []
-
-            if res.multi_face_landmarks:
-                
-                #Extraer mallas faciales
-                
-                for rostros in res.multi_face_landmarks:
-                    
-                    #Dibujar
-                    #
-                    #mpDibujo.draw_landmarks(frame, rostros, MafaObj.FACEMESH_TESSELATION, confiDibujo, confiDibujo)
-                    # nota: nesecita tener buena iluminacion para ejecutarse
-                    
-                    #Extraer puntos
-                    
-                    for id, puntos in enumerate(rostros.landmark):   #no entra al for
-                        
-                        #Info de la imagen
-                        al, an, ni = frame.shape
-                        x = int(puntos.x * an)
-                        y = int(puntos.y *al)
-                        px.append(x)
-                        py.append(y)
-                        lista.append([id, x, y])
-
-                        #Confirmar puntos
-                        if len(lista) == 468:
-
-                            #Ojo derecho
-                            x1, y1 = lista[145][1:]
-                            x2, y2 = lista[159][1:]
-                            longitud1 = math.hypot(x2-x1, y2-y1)                          
-
-                            #Ojo izquierdo
-                            x3, y3 = lista[374][1:]
-                            x4, y4 = lista[386][1:]
-                            longitud2 = math.hypot(x4-x3, y4-y3)
-
-                            #parietal derecho
-                            x5, y5 = lista[139][1:]
-
-                            #Parietal izquierdo
-                            x6, y6 = lista[368][1:]
-
-                            #ceja derecha
-                            x7, y7 = lista[70][1:]
-
-                            #ceja izquierda
-                            x8, y8 = lista[300][1:]
-
-                            cv2.circle(frame, (x8, y8), 2, (255,0,0), cv2.FILLED)
-                            #detector de rostros
-
-                            try:
-                                BbDetec()
-                            except:
-                                Ingresar()
-
-        #Convertir video
-        im = Image.fromarray(frame)
-        img = ImageTk.PhotoImage(image = im)
-
-        #Mostrar video
-        lblVideo.configure(image = img)
-        lblVideo.image = img
-        lblVideo.after(10, Ingresar)
-    
+        ConvVideo()
+        
     else:
         print("no jala")
         cap.release()
