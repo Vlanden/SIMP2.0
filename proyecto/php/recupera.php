@@ -1,8 +1,8 @@
 <?php
     require_once ("conexionBD.php");
-    $user = $_POST['email'];
-    $pass=$_POST['pass'];
-    $pass2=$_POST['pass2'];
+    $user = mysqli_real_escape_string($conexion,$_POST['email']);
+    $pass=mysqli_real_escape_string($conexion,$_POST['pass']);
+    $pass2=mysqli_real_escape_string($conexion,$_POST['pass2']);
 
     if(strcmp($pass,$pass2)==0){
         $passNew=$pass2;
