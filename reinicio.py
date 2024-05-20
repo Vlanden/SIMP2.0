@@ -13,6 +13,13 @@ import os
 import tkinter as tk
 from tkinter import messagebox
 
+response = requests.get("https://superiorteam.site/SIMP2.0/Rostros/220813122.png")
+
+with open(f"Rostros/hh.png", "wb") as file:
+    file.write(response.content)
+
+
+"""
 class App:
     def __init__(self, root):
         self.root = root
@@ -49,6 +56,7 @@ app = App(root)
 root.protocol("WM_DELETE_WINDOW", app.on_closing)
 root.mainloop()
 
+"""
 """
 def VerDir():
 

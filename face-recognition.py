@@ -46,16 +46,16 @@ def Cual_Entra():
     entrada = int(entrada)
 
     if entrada == 1:
-        sql = "SELECT * FROM `usuarios`"
+        sql = "SELECT * FROM `TablaSIMPUsuario`"
         return sql
     elif entrada == 2:
-        sql = "SELECT * FROM `usuarios` WHERE nivel >= '2'"
+        sql = "SELECT * FROM `TablaSIMPUsuario` WHERE Id >= '2'"
         return sql
     elif entrada == 3:
-        sql = "SELECT * FROM `usuarios` WHERE nivel >= '3'"
+        sql = "SELECT * FROM `TablaSIMPUsuario` WHERE Id >= '3'"
         return sql
     elif entrada == 5:
-        sql = "SELECT * FROM `usuarios` WHERE nivel >= '5'"
+        sql = "SELECT * FROM `TablaSIMPUsuario` WHERE Id >= '4'"
         return sql        
     else:
         print("no se ingreso nivel de acceso")
@@ -65,10 +65,10 @@ def conexion():
 
     global entrada
     conexion = pymysql.connect(
-        host="localhost",
-        user="root",
-        password="",
-        db="caras"
+        host="srv1440.hstgr.io",
+        user="u227462272_Usuario_pru",
+        password="gsA123456",
+        db="u227462272_SIMP_pru"
     )
 
     cursor = conexion.cursor()
@@ -82,16 +82,17 @@ def conexion():
     return lista
 
 
-
 def descargar():
 
     global entrada
     
     for search in conexion():
 
-        response = requests.get(search[2])
+        print(search[3])
 
-        with open(f"Rostros/{search[1]}.png", "wb") as file:
+        response = requests.get(search[3])
+
+        with open(f"Rostros/{search[0]}.png", "wb") as file:
             file.write(response.content)
 
 
@@ -123,7 +124,7 @@ def CodeFun():
 
         listacod.append(cod)
 
-    return 
+    return listacod
         
 def pantr():
 
@@ -156,14 +157,143 @@ def reinicio():
     CaraCod = CodeFun()
     Ingresar()
 
-    time = 60
-    pantalla.after(time * 1000, pantr)   
+    time = 90
+    pantalla.after(time * 1000, pantr)  
+
+def BbDetec():
+
+    global xi, yi, anc, alt, Detect, an, al
+    
+    rostrosDet = Detector.process(frameRGB)
+
+    if rostrosDet.detections is not NONE:
+
+        for cara in rostrosDet.detections:
+
+            #info del recuadro : ID, BBox, Score
+            score = cara.score
+            score = score[0] #El score es una lista dentro de otra lista
+
+            bbox = cara.location_data.relative_bounding_box
+
+            if score > Detect:
+
+                xi = bbox.xmin
+                yi= bbox.ymin
+                anc= bbox.width
+                alt = bbox.height
+
+                xi = int(xi * an)
+                yi = int(yi * al)
+                anc = int(anc * an)
+                alt = int(alt * al)
+
+                """#offset de x
+                rangox = (rangox / 100) * anc
+                                        
+                xi = int(xi - int(rangox / 2))
+                anc = int(anc + rangox)
+
+                #offset de y
+                rangoy = (rangoy / 100) + alt
+                yi = int(yi - int(rangoy / 2))
+                alt = int(alt + rangoy)"""
+
+                #posible error
+                if xi < 0:
+                    xi = 0
+                if yi < 0:
+                    yi = 0
+                if anc < 0:
+                    anc = 0
+                if alt < 0:
+                    alt = 0
+
+                PasosCont()
+    else:
+        Ingresar()
+                                        
+def PasosCont():
+
+    global conteo, paso
+
+    if paso == 0:
+
+        if CentrarCara() == True:
+                                            
+           ContParpadeos()
+
+           if paso == 1:
+                BuscarCaras()
+        else:
+            conteo = 0
+
+def CentrarCara():
+    cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,255), 2)
+
+    #centrar cara
+    if x7 > x5 and x8 < x6:
+        cv2.rectangle(frame, (xi,yi,anc,alt), (0,0,255), 2)
+
+        return True
+
+def ContParpadeos():
+
+    global parpadeo, paso, conteo
+    #Contar parpadeos
+
+    #Nota: hay q modificar el parametro de longitudes dependiendo del lugar donde se instale 
+    #y la distancia a la que estara el usuario
+    if longitud1 <= 10 and longitud2 <= 10 and parpadeo == False:
+        conteo = conteo + 1
+        parpadeo = True
+    elif longitud1 > 10 and longitud2 > 10 and parpadeo == True:
+        parpadeo = False
+
+    cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
+
+    if conteo == 2:                                                    
+        paso = 1
+
+def BuscarCaras():
+
+    global paso, conteo
+    #buscar caras
+
+    facess = fr.face_locations(frameRGB)
+    facescod = fr.face_encodings(frameRGB, facess)
+                                                    
+    #iterar
+    for facecod, facesloc in zip(facescod, facess):
+
+        #Matching
+        Match = fr.compare_faces(CaraCod, facecod)
+
+        #similitud
+        simi = fr.face_distance(CaraCod, facecod)
+
+        print(simi)
+
+        min = np.argmin(simi)
+        print(min)                                     
+                                                        
+        if simi[min] > 0.60:
+            print("Usuario no registrado")
+            cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
+            paso = 0
+            conteo = 0
+                                                            
+        else:
+            print("Bienvenido", clases[min])
+            cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
+            paso = 0
+            conteo = 0
 
 #Funcion Sing
 
 def Ingresar():
-    global cap,  conteo, parpadeo, img_info, paso, ret, frame, pantalla, pantalla2, clases
-    
+    global cap,  conteo, parpadeo, img_info, paso, ret, frame, frameRGB, pantalla, pantalla2, clases, xi,yi,anc,alt
+    global longitud1, longitud2, x5, x6, x7, x8, rostrosDet, an, al
 
     #Checar video captura
     if cap is not NONE:
@@ -244,114 +374,10 @@ def Ingresar():
                             cv2.circle(frame, (x8, y8), 2, (255,0,0), cv2.FILLED)
                             #detector de rostros
 
-                            rostrosDet = Detector.process(frameRGB)
-
-                            if rostrosDet.detections is not NONE:
-
-                                for cara in rostrosDet.detections:
-
-                                    #info del recuadro : ID, BBox, Score
-                                    score = cara.score
-                                    score = score[0] #El score es una lista dentro de otra lista
-
-                                    bbox = cara.location_data.relative_bounding_box
-
-                                    if score > Detect:
-                                        xi = bbox.xmin
-                                        yi= bbox.ymin
-                                        anc= bbox.width
-                                        alt = bbox.height
-
-                                        xi = int(xi * an)
-                                        yi = int(yi * al)
-                                        anc = int(anc * an)
-                                        alt = int(alt * al)
-
-                                        """#offset de x
-                                        rangox = (rangox / 100) * anc
-                                        
-                                        xi = int(xi - int(rangox / 2))
-                                        anc = int(anc + rangox)
-
-                                        
-                                        
-                                        #offset de y
-                                        rangoy = (rangoy / 100) + alt
-                                        yi = int(yi - int(rangoy / 2))
-                                        alt = int(alt + rangoy)"""
-
-                                        #posible error
-                                        if xi < 0:
-                                            xi = 0
-                                        if yi < 0:
-                                            yi = 0
-                                        if anc < 0:
-                                            anc = 0
-                                        if alt < 0:
-                                            alt = 0
-
-
-                                        if paso == 0:
-
-                                            #Dibujar rectangulo
-                                        
-                                            cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,255), 2)
-
-                                            #centrar cara
-                                            if x7 > x5 and x8 < x6:
-                                                cv2.rectangle(frame, (xi,yi,anc,alt), (0,0,255), 2)
-
-                                                #Contar parpadeos
-
-                                                #Nota: hay q modificar el parametro de longitudes dependiendo del lugar donde se instale 
-                                                #y la distancia a la que estara el usuario
-                                                if longitud1 <= 10 and longitud2 <= 10 and parpadeo == False:
-                                                    conteo = conteo + 1
-                                                    parpadeo = True
-                                                elif longitud1 > 10 and longitud2 > 10 and parpadeo == True:
-                                                    parpadeo = False
-
-                                                cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
-
-                                                if conteo == 2:                                                    
-                                                    paso = 1
-
-                                                if paso == 1:
-
-                                                    #buscar caras
-                                                    facess = fr.face_locations(frameRGB)
-                                                    facescod = fr.face_encodings(frameRGB, facess)
-                                                    
-
-                                                    #iterar
-                                                    for facecod, facesloc in zip(facescod, facess):
-
-                                                        #Matching
-                                                        Match = fr.compare_faces(CaraCod, facecod)
-
-                                                        #similitud
-                                                        simi = fr.face_distance(CaraCod, facecod)
-
-                                                        print(simi)
-
-                                                        min = np.argmin(simi)
-                                                        print(min)
-                                                  
-                                                        
-                                                        
-                                                        if simi[min] > 0.45:
-                                                            print("Usuario no registrado")
-                                                            cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
-                                                            paso = 0
-                                                            conteo = 0
-                                                            
-                                                        else:
-                                                            print("Bienvenido", clases[min])
-                                                            cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
-                                                            paso = 0
-                                                            conteo = 0
-                                            else:
-                                                conteo = 0
+                            try:
+                                BbDetec()
+                            except:
+                                Ingresar()
 
         #Convertir video
         im = Image.fromarray(frame)
@@ -369,7 +395,6 @@ def Ingresar():
 #Paths 
 
 Ten = VerDir()
-print(Ten)
 SalidaRostros = Ten[0]
 ChecadorRostros = Ten[1]
 
@@ -411,7 +436,7 @@ pantalla.geometry("1280x720")
 
 #CaraCod = CodeFun()
 #Ingresar()
-descargar()
+#descargar()
 reinicio()
 pantalla.mainloop()
 
