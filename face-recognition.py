@@ -46,16 +46,16 @@ def Cual_Entra():
     entrada = int(entrada)
 
     if entrada == 1:
-        sql = "SELECT * FROM `TablaSIMPUsuario`"
+        sql = "SELECT * FROM `simp`"
         return sql
     elif entrada == 2:
-        sql = "SELECT * FROM `TablaSIMPUsuario` WHERE Id >= '2'"
+        sql = "SELECT * FROM `simp` WHERE LAccess >= '2'"
         return sql
     elif entrada == 3:
-        sql = "SELECT * FROM `TablaSIMPUsuario` WHERE Id >= '3'"
+        sql = "SELECT * FROM `simp` WHERE LAccess >= '3'"
         return sql
     elif entrada == 5:
-        sql = "SELECT * FROM `TablaSIMPUsuario` WHERE Id >= '4'"
+        sql = "SELECT * FROM `simp` WHERE LAccess >= '4'"
         return sql        
     else:
         print("no se ingreso nivel de acceso")
@@ -66,9 +66,9 @@ def conexion():
     global entrada
     conexion = pymysql.connect(
         host="srv1440.hstgr.io",
-        user="u227462272_Usuario_pru",
-        password="gsA123456",
-        db="u227462272_SIMP_pru"
+        user="u227462272_User",
+        password="SuperiorTeam2024",
+        db="u227462272_SIMP"
     )
 
     cursor = conexion.cursor()
@@ -88,11 +88,9 @@ def descargar():
     
     for search in conexion():
 
-        print(search[3])
+        response = requests.get(search[4])
 
-        response = requests.get(search[3])
-
-        with open(f"Rostros/{search[0]}.png", "wb") as file:
+        with open(f"Rostros/{search[2]}.png", "wb") as file:
             file.write(response.content)
 
 
@@ -154,6 +152,7 @@ def reinicio():
     cap.set(3, 1280)
     cap.set(4, 720)
 
+    descargar()
     CaraCod = CodeFun()
     Ingresar()
 
@@ -450,22 +449,7 @@ pantalla.geometry("1280x720")
 
 #CaraCod = CodeFun()
 #Ingresar()
-#descargar()
+
 reinicio()
 pantalla.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
