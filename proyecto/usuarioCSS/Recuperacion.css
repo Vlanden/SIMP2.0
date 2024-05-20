@@ -1,0 +1,370 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    width: auto;
+    background: linear-gradient(rgb(15, 0, 70),black);
+    background-size: cover;
+    font-family: 'Times New Roman', Times, serif;
+    justify-content: center;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+}
+
+main{
+    height: auto;
+    width: auto;
+}
+
+#Reg{
+    width: 768px;
+    height: 100%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(75%, 8%);
+    box-shadow: 0px, 0px, 2px, 6px, gray;
+}
+
+#re{
+    color: navy;
+    font-size: 200%;
+    text-align: center;
+}
+
+#em, #fa, #cn{
+    border: none;
+    color: navy;
+    font-size: 16px;
+    width: 640px;
+    height: 24px;
+    background-color: white;
+    border-bottom: 1px solid navy;
+}
+
+::placeholder{
+    color: lightblue;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+label{
+    color: navy;
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 26px;
+}
+
+#sb, #rst{
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background-color: skyblue;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    top: 50%;
+    left: 50%;
+    transform: translate(100%, 0%);
+    width: 120px;
+    height: 36px;
+}
+
+.file{
+    position: absolute;
+    display: inline-block;
+}
+
+.file input[type="file"]{
+    opacity: 0;
+}
+
+.file::before{
+    display: flexbox;
+    justify-content: left;
+    align-items: left;
+    content: 'Seleccione el archivo';
+    border: none;
+    border-bottom: 1px solid navy;
+    color: lightblue;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    width: 180px;
+    height: 24px;
+    background-color: white;
+}
+
+#fa::before{
+    content: 'Seleccione el archivo';
+}
+
+#frm{
+    top: 50%;
+    left: 50%;
+    transform: translate(7%, 0%);
+}
+
+#btt{
+    top: 50%;
+    left: 50%;
+    transform: translate(20%, 0%);
+    justify-content: space-around;
+}
+
+#li{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: skyblue;
+    justify-content: space-between;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:link{
+    color: skyblue;
+}
+
+a:active{
+    color: skyblue;
+}
+
+a:hover{
+    transition: 0.5s;
+    color:dodgerblue
+}
+
+#rst:hover{
+    transition: 1s;
+    background-color: blue;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+
+#sb:hover{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+    background-color: blue;
+}
+
+#rst:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+    background-color: blue;
+}
+
+#sb:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+    background-color: blue;
+}
+
+input:focus{
+    outline: none;
+}
+
+#em:focus
+{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+
+#fa:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+
+
+#cn:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    height: 100%;
+    width: auto;
+    background: linear-gradient(rgb(15, 0, 70),black);
+    background-size: cover;
+    font-family: 'Times New Roman', Times, serif;
+    justify-content: center;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+}
+
+main{
+    height: auto;
+    width: auto;
+}
+
+#Reg{
+    width: 768px;
+    height: 100%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(75%, 8%);
+    box-shadow: 0px, 0px, 2px, 6px, gray;
+}
+
+#re{
+    color: navy;
+    font-size: 200%;
+    text-align: center;
+}
+
+#em, #fa, #cn{
+    border: none;
+    color: navy;
+    font-size: 16px;
+    width: 640px;
+    height: 24px;
+    background-color: white;
+    border-bottom: 1px solid navy;
+}
+
+::placeholder{
+    color: lightblue;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+label{
+    color: navy;
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 26px;
+}
+
+#sb, #rst{
+    border-radius: 8px;
+    border: none;
+    color: white;
+    background-color: skyblue;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    top: 50%;
+    left: 50%;
+    transform: translate(100%, 0%);
+    width: 120px;
+    height: 36px;
+}
+
+.file{
+    position: absolute;
+    display: inline-block;
+}
+
+.file input[type="file"]{
+    opacity: 0;
+}
+
+.file::before{
+    display: flexbox;
+    justify-content: left;
+    align-items: left;
+    content: 'Seleccione el archivo';
+    border: none;
+    border-bottom: 1px solid navy;
+    color: lightblue;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    width: 180px;
+    height: 24px;
+    background-color: white;
+}
+
+#fa::before{
+    content: 'Seleccione el archivo';
+}
+
+#frm{
+    top: 50%;
+    left: 50%;
+    transform: translate(7%, 0%);
+}
+
+#btt{
+    top: 50%;
+    left: 50%;
+    transform: translate(20%, 0%);
+    justify-content: space-around;
+}
+
+#li{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: skyblue;
+    justify-content: space-between;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:link{
+    color: skyblue;
+}
+
+a:active{
+    color: skyblue;
+}
+
+a:hover{
+    transition: 0.5s;
+    color:dodgerblue
+}
+
+#rst:hover{
+    transition: 1s;
+    background-color: blue;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+
+#sb:hover{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+    background-color: blue;
+}
+
+#rst:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+    background-color: blue;
+}
+
+#sb:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+    background-color: blue;
+}
+
+input:focus{
+    outline: none;
+}
+
+#em:focus
+{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+
+#fa:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}
+
+
+#cn:focus{
+    transition: 1s;
+    box-shadow: 0px 0px 2px 2px rgba(0, 136, 255, 0.2);
+}

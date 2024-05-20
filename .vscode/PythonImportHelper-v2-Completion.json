@@ -125,7 +125,7 @@
         "kind": 5,
         "importPath": "face-recognition",
         "description": "face-recognition",
-        "peekOfCode": "SalidaRostros = \"C:/xampp/htdocs/SIMP2.0/Rostros\"\nChecadorRostros = \"C:/xampp/htdocs/SIMP2.0/Rostros\"\n#variables\npaso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion",
+        "peekOfCode": "SalidaRostros = \"Rostros/\"\nChecadorRostros = \"Rostros/\"\n#variables\npaso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion",
         "detail": "face-recognition",
         "documentation": {}
     },
@@ -134,7 +134,7 @@
         "kind": 5,
         "importPath": "face-recognition",
         "description": "face-recognition",
-        "peekOfCode": "ChecadorRostros = \"C:/xampp/htdocs/SIMP2.0/Rostros\"\n#variables\npaso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 ",
+        "peekOfCode": "ChecadorRostros = \"Rostros/\"\n#variables\npaso = 0\nparpadeo = False\nconteo = 0\n#rango estra a la cara\nrangoy = 30\nrangox = 20\n#exactitud de deteccion\nDetect = 0.5 ",
         "detail": "face-recognition",
         "documentation": {}
     },
