@@ -9,7 +9,6 @@
     $sql = mysqli_query($conexion, "SELECT * FROM simp WHERE ID = '{$ID}'");
 
     $sql = mysqli_fetch_array($sql);
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
