@@ -15,17 +15,16 @@ import pymysql
 import serial
 import time
 
-def cerrar():
-    if Entry.winfo_viewable() == 1:
-        print()
-
+#Genera automaticamente los paths de la carpeta donde se almacenaran las imagenes de manera local
 def VerDir():
 
+    #Comprueba si existe el directorio o carpeta Rostros
     if os.path.exists("Rostros") == False:
 
         os.mkdir("Rostros")
         Salida = os.getcwd()
 
+        #Genera una lista con los 2 paths necesarios
         Salida = Salida + "/Rostros"
         Salida2 = Salida + "/Rostros/"
         ListPaths = []
@@ -40,7 +39,8 @@ def VerDir():
 
         
 
-
+#Dependiendo del nivel de acceso de esta ubicasion sera los usuarios que descargue
+#Cada nivel es un query especifico
 def Cual_Entra():
 
     global entrada
@@ -54,13 +54,13 @@ def Cual_Entra():
     elif entrada == 3:
         sql = "SELECT * FROM `simp` WHERE LAccess >= '3'"
         return sql
-    elif entrada == 5:
+    elif entrada == 4:
         sql = "SELECT * FROM `simp` WHERE LAccess >= '4'"
         return sql        
     else:
         print("no se ingreso nivel de acceso")
 
-
+#genera la conexion con la base de datos
 def conexion():
 
     global entrada
@@ -73,23 +73,27 @@ def conexion():
 
     cursor = conexion.cursor()
 
+    #Llama a la funcion en la que se especificara el query con los usuarios
     sql = Cual_Entra()
 
     cursor.execute(sql)
 
+    #almacena la lista de los usuarios con el nivel de acceso
     lista = cursor.fetchall()
 
     return lista
 
-
+#descarga imagen por imagen desde el alojamiento
 def descargar():
 
     global entrada
     
     for search in conexion():
 
+        #esta es la funcion que mediante una url almacenada en el campo LAccess se obtiene su informacion
         response = requests.get(search[4])
 
+        #escribe dentro de la carpeta Rostros la imagen jalada y la almacena como un png
         with open(f"Rostros/{search[2]}.png", "wb") as file:
             file.write(response.content)
 
@@ -98,7 +102,7 @@ def descargar():
 def CodeFun():
     global images, clases, listarf
 
-    #DB De las caras
+    #Paths de las caras
     images = []
     clases = []
     listarf = os.listdir(SalidaRostros)
@@ -117,13 +121,14 @@ def CodeFun():
     for img in images:
         #cambiar color
         cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
+        #codifica la imagen
         cod = fr.face_encodings(img)[0]
 
         listacod.append(cod)
 
     return listacod
         
+#destruye la pantalla 2 y vuelve a llamar a la funcion "principal"
 def pantr():
 
     global pantalla, pantalla2, CaraCod, cap, lblVideo
@@ -133,7 +138,7 @@ def pantr():
     
     reinicio()
 
-
+#Genera la pantalla 2 y el label de video
 def reinicio():
 
     global pantalla, pantalla2, CaraCod, cap, lblVideo
@@ -152,10 +157,12 @@ def reinicio():
     cap.set(3, 1280)
     cap.set(4, 720)
 
+    #llama a las funciones que descargaran las imagenes, las codificaran y se ejetutara el algoritmo de reconocimiento
     descargar()
     CaraCod = CodeFun()
     Ingresar()
 
+    #cada x tiempo llamara a la funcion que destruye la pantalla 2
     time = 90
     pantalla.after(time * 1000, pantr)  
 
@@ -171,6 +178,8 @@ def ConvVideo():
     lblVideo.image = img
     lblVideo.after(10, Ingresar)
 
+
+#procesa informacion de la malla facial
 def ProcMalla():
 
     global longitud1, longitud2, x5, x6, x7, x8, rostrosDet, an, al
@@ -234,13 +243,10 @@ def ProcMalla():
                     cv2.circle(frame, (x1, y1), 2, (255,0,0), cv2.FILLED)
                     
                     
-                    #detector de rostros
-
-                    
+                    #detector de rostros  
                     BbDetec()
                     
-                        
-
+#detecta los rostros y prepara el Bbox
 def BbDetec():
 
     global xi, yi, anc, alt, Detect, an, al, rostrosDet
@@ -290,25 +296,31 @@ def BbDetec():
                 if alt < 0:
                     alt = 0
 
+                #Empieza con los pasos o niveles para detectar el liveness
                 PasosCont()
     else:
         Ingresar()
-                                        
+
+#Esta funcion lleva el control de los pasos a seguir para el acceso                                        
 def PasosCont():
 
     global conteo, paso
 
     if paso == 0:
 
+        #Llama a la funcion para centrar el rostro en la camara
         if CentrarCara() == True:
-                                            
-           ContParpadeos()
 
-           if paso == 1:
+            #Llama a la funcion que detecta y cuenta los parpadeos                                 
+            ContParpadeos()
+
+            #si cuenta con los parpadeos llamara a la funcion de buscar Match
+            if paso == 1:
                 BuscarCaras()
         else:
             conteo = 0
 
+#Con la distancia de los parietales y las cejas ubica si esta centrado el rostro
 def CentrarCara():
     cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,255), 2)
 
@@ -317,12 +329,12 @@ def CentrarCara():
         cv2.rectangle(frame, (xi,yi,anc,alt), (0,0,255), 2)
 
         return True
-
+    
+#Contar parpadeos
 def ContParpadeos():
 
     global parpadeo, paso, conteo
-    #Contar parpadeos
-
+    
     #Nota: hay q modificar el parametro de longitudes dependiendo del lugar donde se instale 
     #y la distancia a la que estara el usuario
     if longitud1 <= 10 and longitud2 <= 10 and parpadeo == False:
@@ -331,18 +343,18 @@ def ContParpadeos():
     elif longitud1 > 10 and longitud2 > 10 and parpadeo == True:
         parpadeo = False
 
+    #genera el texto que indica cuantos parpadeos lleva
     cv2.putText(frame, f"Parpadeos: {int(conteo)}", (1070,375), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1)
 
     if conteo == 2:                                                    
         paso = 1
 
+
 def BuscarCaras():
 
     global paso, conteo, ser
 
-    
     #buscar caras
-
     facess = fr.face_locations(frameRGB)
     facescod = fr.face_encodings(frameRGB, facess)
                                                     
@@ -357,18 +369,21 @@ def BuscarCaras():
 
         print(simi)
 
+        #busca cual es el resultado mas parecido
         min = np.argmin(simi)
         print(min)  
 
-        #Definir variable de comunicasion con el puerto serial
-        #Nota: COM3 se debe de modificar dependiendo del puerto donde se conecte el arduino                                   
-                                                        
+                                          
+        #se define el parametro de que tan exacto quieres que sea la similitud
+        #entre mas grande sea el punto de comparacion menos preciso sera                                                
         if simi[min] > 0.60:
             print("Usuario no registrado")
             cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
             
+            #manda mensaje al puerto serial del arduino
             ser.write(b'1')
-            print("no")
+            
+            #reinicia el proceso de reconocimiento
             paso = 0
             conteo = 0
                                                             
@@ -376,15 +391,17 @@ def BuscarCaras():
             print("Bienvenido", clases[min])
             cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
             
+            #manda mensaje al puerto serial del arduino
             ser.write(b'2')
-            print("si")
+            
+            #reinicia el proceso de reconocimiento
             paso = 0
             conteo = 0
 
-#Funcion Sing
+#Funcion de ingreso
 
 def Ingresar():
-    global cap,  conteo, parpadeo, img_info, paso, ret, frame, frameRGB, pantalla, pantalla2, clases, xi,yi,anc,alt
+    global cap, parpadeo, ret, frame, frameRGB
     
 
     #Checar video captura
@@ -402,12 +419,14 @@ def Ingresar():
         #Frame a mostrar y cambiar de color
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
+        #llama a la funcion de procesar malla pero si se genera un error se volvera a llamar esta misma funcion 
+        #para generar otro resultado
         if ret == True:
             try:
                 ProcMalla()
             except:
                 Ingresar()
-
+        #llama a la funcion que convierte los frames a video
         ConvVideo()
         
     else:
@@ -456,12 +475,13 @@ pantalla = Tk()
 pantalla.title("Reconocimiento")
 pantalla.geometry("1280x720")
 
-#CaraCod = CodeFun()
-#Ingresar()
-
+#Define el nivel de acceso que este equipo
 entrada = input("Ingresa el nivel de entrada: ")
 entrada = int(entrada)
 
+
+#Definir variable de comunicasion con el puerto serial
+#Nota: COM3 se debe de modificar dependiendo del puerto donde se conecte el arduino 
 ser = serial.Serial('COM3', 9600, timeout=1)
 time.sleep(1)
 
