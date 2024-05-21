@@ -3,11 +3,6 @@
     if(!isset($_SESSION['ID'])){
         header("Location: ../proyecto/usuarioHTML/InicioSesion.html");
     }
-
-    require_once('proyecto/php/conexionBD.php');
-    $ID = $_SESSION['ID'];
-    $sql = mysqli_query($conexion, "SELECT * FROM simp WHERE ID = '{$ID}'");
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -74,11 +69,12 @@
                 <a href="ConfigurarDatos.html"><img src="../Imagenes/configuraciones.png" id="cf"></a>
                 </div>
                 <!-- <a href="ConfigurarDatos.html"><input type="button" value="Configuracion" id="config"></a> -->
-                <p id="ID"><?php echo $sql['ID'];?></p>
-                <p id="N"><?php echo $sql['nom'];?></p>
-                <p id="C"><?php echo $sql['correo'];?></p>
-                <a href="../../PHP/logout.php">Cerrar Sesion</a>
-                <a href="../../PHP/logout.php">Modificar Datos</a>
+                <p id="ID"><?php echo $_SESSION['ID'];?></p>
+                <form action="" method="POST">
+                    <input type="text" name="name" id="N" placeholder="Nombre">
+                    <input type="text" name="correo" id="C" placeholder="Correo">
+                    <input type="submit" name="Guardar Datos">
+                </form>
             </section>
         </article>
     </main>
