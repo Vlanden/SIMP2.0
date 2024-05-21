@@ -9,7 +9,7 @@
 body{
     height: 100vh;
     display: grid;
-    background-color:rgb(23, 0, 44);
+    background-color:white;
 }
 
 .header{
@@ -59,13 +59,14 @@ body{
 }
 
 #info{
-    position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(100%, 5%);
+    margin-left: 208px;
     width: 500px;
     border-radius: 10px;
     background-color: white;
+    box-shadow: 0 0 2px slateblue;
 }
 
 #info h1{
