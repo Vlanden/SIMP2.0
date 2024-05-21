@@ -12,6 +12,8 @@ from PIL import Image, ImageTk
 import imutils
 import requests
 import pymysql
+import serial
+import time
 
 def cerrar():
     if Entry.winfo_viewable() == 1:
@@ -42,9 +44,7 @@ def VerDir():
 def Cual_Entra():
 
     global entrada
-    entrada = input("Ingresa el nivel de entrada: ")
-    entrada = int(entrada)
-
+    
     if entrada == 1:
         sql = "SELECT * FROM `simp`"
         return sql
@@ -251,8 +251,6 @@ def BbDetec():
 
         for cara in rostrosDet.detections:
 
-            
-
             #info del recuadro : ID, BBox, Score
             score = cara.score
             score = score[0] #El score es una lista dentro de otra lista
@@ -340,7 +338,10 @@ def ContParpadeos():
 
 def BuscarCaras():
 
-    global paso, conteo
+    global paso, conteo, ser
+
+    ser = serial.Serial('COM3', 9600, timeout=1)
+    time.sleep(1)
     #buscar caras
 
     facess = fr.face_locations(frameRGB)
@@ -358,17 +359,24 @@ def BuscarCaras():
         print(simi)
 
         min = np.argmin(simi)
-        print(min)                                     
+        print(min)  
+
+        #Definir variable de comunicasion con el puerto serial
+        #Nota: COM3 se debe de modificar dependiendo del puerto donde se conecte el arduino                                   
                                                         
         if simi[min] > 0.60:
             print("Usuario no registrado")
             cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
+            
+            ser.write(b'1')
             paso = 0
             conteo = 0
                                                             
         else:
             print("Bienvenido", clases[min])
             cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
+            
+            ser.write(b'2')
             paso = 0
             conteo = 0
 
@@ -450,6 +458,9 @@ pantalla.geometry("1280x720")
 #CaraCod = CodeFun()
 #Ingresar()
 
+entrada = input("Ingresa el nivel de entrada: ")
+entrada = int(entrada)
+
 reinicio()
 pantalla.mainloop()
-
+ser.close()
