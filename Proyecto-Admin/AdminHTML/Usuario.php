@@ -73,6 +73,7 @@
                 <div id="foto-item">
                     <img id="fotoUsuario" src="../Imagenes/LOGO-SIMP-Photoroom.png">
                 </div>
+                
                 <p id="N">Nombre de ejemplo</p>
                 <p id="ID">ID de ejemplo</p>
                 <p id="C">Correo de ejemplo</p>
@@ -103,21 +104,23 @@
                             </tr>
                             
                         </thead>
-                        <tbody>
-                            <tr>
-                            <?php
+                        
+                                <?php
                                 while($mostrar = mysqli_fetch_array($enviar)){
                                    
                                 ?>
-                                <td class="ud"> <?php echo($mostrar['name'])."<br>";?></td>
-                                <td class="ud"> <?php echo($mostrar['Correo'])."<br>";?></td>
+                        <tbody>
+                            <tr>
+                           
+                               
+                                <td class="ud"> <?php echo($mostrar['name']);?></td>
+                                <td class="ud"> <?php echo($mostrar['Correo']);?></td>
                                 <td><button class="Perfil" onclick="location.href='verfificacion.php'">Validar perfil</button></td>
                                 <td><button class="Perfil" onclick="location.href='../AdminHTML/Usuarios.html'">Ingresar al perfil</button></td>
-                                <?php
-                                }
-                         ?>
+                                
                             </tr>
                         </tbody>
+                        <?php }?>
                     </table>
                 </div>
             </section>
@@ -125,3 +128,5 @@
 
     </main>
 
+</body>
+</html>
