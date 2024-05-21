@@ -369,6 +369,7 @@ def BuscarCaras():
             cv2.rectangle(frame, (xi,yi,anc,alt), (255,0,0), 2)
             
             ser.write(b'1')
+            print("no")
             paso = 0
             conteo = 0
                                                             
@@ -377,6 +378,7 @@ def BuscarCaras():
             cv2.rectangle(frame, (xi,yi,anc,alt), (0,255,0), 2)
             
             ser.write(b'2')
+            print("si")
             paso = 0
             conteo = 0
 
@@ -463,4 +465,5 @@ entrada = int(entrada)
 
 reinicio()
 pantalla.mainloop()
-ser.close()
+global ser
+ser = ser.close()
