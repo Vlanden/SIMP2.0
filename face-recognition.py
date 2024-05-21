@@ -252,8 +252,8 @@ def Ingresar():
 
 #Paths 
 
-SalidaRostros = "C:/xampp/htdocs/SIMP2.0/Rostros"
-ChecadorRostros = "C:/xampp/htdocs/SIMP2.0/Rostros"
+SalidaRostros = "Rostros/"
+ChecadorRostros = "Rostros/"
 
 #variables
 paso = 0
