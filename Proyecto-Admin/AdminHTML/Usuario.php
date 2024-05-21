@@ -1,3 +1,12 @@
+<?php
+
+    include_once("../PHP/conexionBD.php");
+
+    $sentencia = 'SELECT * FROM usuarios';
+
+    $enviar = mysqli_query($conexion,$sentencia);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,23 +89,33 @@
                     <input type="text" placeholder="Buscar usuarios">
                     <button type="submit" value="busqueda"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
+                
                 <br>
                 <div id="tabla">
                     <table class="usuarios">
                         <thead>
                             <tr>
+                           
                                 <th  id="nu">Nombre</th>
                                 <th id="cu">Correo</th>
                                 <th id="vp">Validar perfil</th>
                                 <th id="hp">Ver perfil</th>
                             </tr>
+                            
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="ud">n</td>
-                                <td class="ud">n</td>
+                            <?php
+                                while($mostrar = mysqli_fetch_array($enviar)){
+                                   
+                                ?>
+                                <td class="ud"> <?php echo($mostrar['name'])."<br>";?></td>
+                                <td class="ud"> <?php echo($mostrar['Correo'])."<br>";?></td>
                                 <td><button class="Perfil" onclick="location.href='verfificacion.php'">Validar perfil</button></td>
                                 <td><button class="Perfil" onclick="location.href='../AdminHTML/Usuarios.html'">Ingresar al perfil</button></td>
+                                <?php
+                                }
+                         ?>
                             </tr>
                         </tbody>
                     </table>
@@ -106,5 +125,3 @@
 
     </main>
 
-</body>
-</html>
