@@ -340,8 +340,7 @@ def BuscarCaras():
 
     global paso, conteo, ser
 
-    ser = serial.Serial('COM3', 9600, timeout=1)
-    time.sleep(1)
+    
     #buscar caras
 
     facess = fr.face_locations(frameRGB)
@@ -463,7 +462,10 @@ pantalla.geometry("1280x720")
 entrada = input("Ingresa el nivel de entrada: ")
 entrada = int(entrada)
 
+ser = serial.Serial('COM3', 9600, timeout=1)
+time.sleep(1)
+
 reinicio()
 pantalla.mainloop()
-global ser
+
 ser = ser.close()
