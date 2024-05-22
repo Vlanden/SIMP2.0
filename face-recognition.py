@@ -81,6 +81,8 @@ def conexion():
     #almacena la lista de los usuarios con el nivel de acceso
     lista = cursor.fetchall()
 
+    print(lista)
+
     return lista
 
 #descarga imagen por imagen desde el alojamiento
