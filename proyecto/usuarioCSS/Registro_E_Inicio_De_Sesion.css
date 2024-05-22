@@ -32,6 +32,25 @@ body{
     color: cornflowerblue;
 }
 
+.Registro2{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -45%);
+    width: 500px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 4px slateblue;
+}
+
+.Registro2 h1{
+    padding-top: 50px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 40px;
+    color: cornflowerblue;
+}
+
 #N, #C, #ID, #P, #P-New, #P-New2{
     cursor: pointer;
     color: midnightblue;
@@ -76,32 +95,6 @@ body{
     transition: 1s;
     border-bottom: 1px solid cornflowerblue;
 }
-
-
-
-/* #N:invalid{
-    border-bottom: 1px solid red;
-}
-
-#C:invalid{
-    border-bottom: 1px solid red;
-}
-
-#ID:invalid{
-    border-bottom: 1px solid red;
-}
-
-#P:invalid{
-    border-bottom: 1px solid red;
-}
-
-#P-New:invalid{
-    border-bottom: 1px solid red;
-}
-
-#P-New2:invalid{
-    border-bottom: 1px solid red;
-} */
 
 #ID:read-only{
     background-color: lightsteelblue;
@@ -291,27 +284,27 @@ li:hover > ul{
 .CI #c{
     font-size: 36px;
     color: lightskyblue;
-    font-family: "Poetsen One", sans-serif;
+    font-family: "Source Code Pro", monospace;
 }
 
 .CI #c2{
     font-size: 36px;
-    color: lightskyblue;
-    font-family: "Poetsen One", sans-serif;
+    color: skyblue;
+    font-family: "Source Code Pro", monospace;
 }
 
 .link{
     font-size: 36px;
     text-decoration: none;
-    color: lightskyblue;
+    color: dodgerblue;
     transition: 0.5s;
-    font-family: "Poetsen One", sans-serif;
+    font-family: "Source Code Pro", monospace;
 }
 
 span{
     font-size: 36px;
-    font-family: "Poetsen One", sans-serif;
-    color: lightskyblue;
+    font-family: "Source Code Pro", monospace;
+    color: skyblue;
 }
 
 .link:link{
@@ -323,7 +316,18 @@ span{
 }
 
 .link:hover{
-    color:steelblue;
+    color: mediumblue;
     transition: 0.5s;
     font-size: 38px;
+}
+
+h5{
+    font-family: "Source Code Pro", monospace;
+    color: slateblue;
+    transition: 0.5s;
+}
+
+h5:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
 }
