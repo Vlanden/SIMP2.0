@@ -36,6 +36,7 @@ summary{
     padding: 16px;
     cursor: pointer;
     border-bottom: 1px solid midnightblue;
+    transition: margin 1s ease-out;
 }
 
 p{
@@ -43,6 +44,22 @@ p{
     font-family: "Source Serif 4", serif;
     color: darkblue;
     font-size: 16px;
+}
+
+details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+
+
+@keyframes sweep {
+    from{
+        opacity: 0;
+        margin-top: -10px;
+    }
+    to{
+        opacity: 1;
+        margin-top: 0px;
+    }
 }
 
 /* .PR{

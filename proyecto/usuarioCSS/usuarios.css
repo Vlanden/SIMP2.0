@@ -10,6 +10,10 @@ body{
     height: 100vh;
     display: grid;
     background-color:white;
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .header{
