@@ -1,8 +1,6 @@
 #nota: la ilumnacion es importante para que se ejecute el programa, sin iluminacion adecuada no se ejecutara
 import cv2
 import mediapipe as mp
-from mediapipe.tasks import python
-from mediapipe.tasks.python import vision
 import face_recognition as fr
 import numpy as np
 import os 
@@ -140,6 +138,14 @@ def pantr():
     
     reinicio()
 
+def VidCap():
+
+    global cap 
+    #captura de video
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap.set(3, 1280)
+    cap.set(4, 720)
+
 #Genera la pantalla 2 y el label de video
 def reinicio():
 
@@ -154,10 +160,8 @@ def reinicio():
     lblVideo.place(x=0, y=0)
 
 
-    #captura de video
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-    cap.set(3, 1280)
-    cap.set(4, 720)
+    #capturar video
+    VidCap()
 
     #llama a las funciones que descargaran las imagenes, las codificaran y se ejetutara el algoritmo de reconocimiento
     descargar()
@@ -165,7 +169,7 @@ def reinicio():
     Ingresar()
 
     #cada x tiempo llamara a la funcion que destruye la pantalla 2
-    time = 90
+    time = 180
     pantalla.after(time * 1000, pantr)  
 
 def ConvVideo():
@@ -184,7 +188,7 @@ def ConvVideo():
 #procesa informacion de la malla facial
 def ProcMalla():
 
-    global longitud1, longitud2, x5, x6, x7, x8, rostrosDet, an, al
+    global longitud1, longitud2, x5, x6, x7, x8, rostrosDet, an, al, res
 
     #Agregar malla facial
     res = MallaFacial.process(frameRGB)
@@ -403,7 +407,7 @@ def BuscarCaras():
 #Funcion de ingreso
 
 def Ingresar():
-    global cap, parpadeo, ret, frame, frameRGB
+    global cap, parpadeo, ret, frame, frameRGB, rostrosDet
     
 
     #Checar video captura
@@ -421,18 +425,28 @@ def Ingresar():
         #Frame a mostrar y cambiar de color
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        #llama a la funcion de procesar malla pero si se genera un error se volvera a llamar esta misma funcion 
-        #para generar otro resultado
-        if ret == True:
-            try:
-                ProcMalla()
-            except:
-                Ingresar()
-        #llama a la funcion que convierte los frames a video
-        ConvVideo()
-        
+        jala = True
+        try:
+            #llama a la funcion de procesar malla pero si se genera un error se volvera a llamar esta misma funcion 
+            #para generar otro resultado
+            if ret == True:
+                
+                ProcMalla()  
+        except Exception as error:
+            print(error)
+            jala = False
+        #si no genera error sigue con el funcionamiento del programa
+        if jala == True:
+            #llama a la funcion que convierte los frames a video
+            ConvVideo()
+        #si genera error reinicia la pantalla
+        else:
+            cap.release()
+            time = 1
+            pantalla.after(time * 1000, pantr)
+
     else:
-        print("no jala")
+        print("verifique el estado de la entrada de video")
         cap.release()
     
 #Paths 
@@ -453,24 +467,29 @@ rangox = 20
 #exactitud de deteccion
 Detect = 0.5 
 
-#herramienta de dibujo
-mpDibujo = mp.solutions.drawing_utils
-confiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)
+def GenerarHer():
+
+    global mpDibujo, confiDibujo, MafaObj, MallaFacial, ObjetoDet, Detector
+    #herramienta de dibujo
+    mpDibujo = mp.solutions.drawing_utils
+    confiDibujo = mpDibujo.DrawingSpec(thickness = 1, circle_radius = 1)
 
 
-#malla facial como objeto
-MafaObj =  mp.solutions.face_mesh
-MallaFacial = MafaObj.FaceMesh(max_num_faces = 1)
+    #malla facial como objeto
+    MafaObj =  mp.solutions.face_mesh
+    MallaFacial = MafaObj.FaceMesh(max_num_faces = 1)
 
 
-#objeto detector de caras
-ObjetoDet = mp.solutions.face_detection
-Detector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)
+    #objeto detector de caras
+    ObjetoDet = mp.solutions.face_detection
+    Detector = ObjetoDet.FaceDetection(min_detection_confidence = 0.5, model_selection = 1)
 
 
 #por si se ocupa informacion local
 info = []
 
+#generar herramientas de dibujo y deteccion
+GenerarHer()
 
 #Ventana principal
 pantalla = Tk()
