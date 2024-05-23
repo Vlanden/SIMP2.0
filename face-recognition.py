@@ -151,6 +151,17 @@ def pantr():
     pantalla2.destroy()
     
     reinicio()
+#destruye la pantalla 2 y vuelve a generarla sin tener que cargar otra vez los rostros
+#es para el manejo de errores donde si se congela el proyecto reiniciara la pantalla de manera rapida
+def pantr2():
+
+    global pantalla, pantalla2, CaraCod, cap, lblVideo
+
+    print("si")
+    pantalla2.destroy()
+    
+    reinicio2()
+
 
 def VidCap():
 
@@ -160,7 +171,7 @@ def VidCap():
     cap.set(3, 1280)
     cap.set(4, 720)
 
-#Genera la pantalla 2 y el label de video
+#Genera la pantalla 2 y el label de video volviendo a cargar rostros
 def reinicio():
 
     global pantalla, pantalla2, CaraCod, cap, lblVideo
@@ -179,7 +190,7 @@ def reinicio():
 
     #eliminar a los usuarios que ya no esten registrados
     limpiar()
-    
+
     #llama a las funciones que descargaran las imagenes, las codificaran y se ejetutara el algoritmo de reconocimiento
     descargar()
     
@@ -188,7 +199,30 @@ def reinicio():
 
     #cada x tiempo llamara a la funcion que destruye la pantalla 2
     time = 180
-    pantalla.after(time * 1000, pantr)  
+    pantalla.after(time * 1000, pantr)
+
+#Genera la pantalla 2 y el label de video pero sin volver a cargar los rostros
+def reinicio2():
+
+    global pantalla, pantalla2, CaraCod, cap, lblVideo
+
+    pantalla2 = Toplevel(pantalla)
+    pantalla2.title("Uso")
+    pantalla2.geometry("1280x720")
+
+    #label de video
+    lblVideo = Label(pantalla2)
+    lblVideo.place(x=0, y=0)
+
+    #capturar video
+    VidCap()
+
+    Ingresar()
+
+    #cada x tiempo llamara a la funcion que destruye la pantalla 2
+    time = 180
+    pantalla.after(time * 1000, pantr)
+
 
 def ConvVideo():
 
@@ -308,7 +342,7 @@ def BbDetec():
                 #offset de y
                 rangoy = (rangoy / 100) + alt
                 yi = int(yi - int(rangoy / 2))
-                alt = int(alt + rangoy)"""
+                alt = int(alt + rangoy)
 
                 #posible error
                 if xi < 0:
@@ -319,6 +353,7 @@ def BbDetec():
                     anc = 0
                 if alt < 0:
                     alt = 0
+                """
 
                 #Empieza con los pasos o niveles para detectar el liveness
                 PasosCont()
@@ -461,7 +496,7 @@ def Ingresar():
         else:
             cap.release()
             time = 1
-            pantalla.after(time * 1000, pantr)
+            pantalla.after(time * 1000, pantr2)
 
     else:
         print("verifique el estado de la entrada de video")
