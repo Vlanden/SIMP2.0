@@ -97,6 +97,20 @@ def descargar():
         with open(f"Rostros/{search[2]}.png", "wb") as file:
             file.write(response.content)
 
+    
+def limpiar():
+
+    for buscar in conexion():
+
+        listaqu = []
+        listaqu.append(str(buscar[2]) + ".png")
+
+    for deleteador in os.listdir(SalidaRostros):
+        if deleteador not in listaqu:
+            rut = SalidaRostros + "/" + deleteador
+            os.remove(rut)
+
+
 
 #Codificar iamgenes
 def CodeFun():
@@ -163,8 +177,12 @@ def reinicio():
     #capturar video
     VidCap()
 
+    #eliminar a los usuarios que ya no esten registrados
+    limpiar()
+    
     #llama a las funciones que descargaran las imagenes, las codificaran y se ejetutara el algoritmo de reconocimiento
     descargar()
+    
     CaraCod = CodeFun()
     Ingresar()
 
