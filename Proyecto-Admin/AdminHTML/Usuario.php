@@ -116,7 +116,7 @@
                                 <td class="ud"> <?php echo($mostrar['name']);?></td>
                                 <td class="ud"> <?php echo($mostrar['Correo']);?></td>
                                 <td><button class="Perfil" onclick="location.href='verfificacion.php'">Validar perfil</button></td>
-                                <td><button class="Perfil" onclick="location.href='../AdminHTML/Usuarios.html'">Ingresar al perfil</button></td>
+                                <td><a class="Perfil"  href="Usuarios.php?ID=<?php echo($mostrar['ID']);?>">  Ingresar al perfil</a></td>
                                 
                             </tr>
                         </tbody>
